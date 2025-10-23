@@ -1,2 +1,2 @@
 import "./styles/styles.scss";
-import "./modules/renderer";
+import "./modules/sceneSetup";
