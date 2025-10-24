@@ -18,7 +18,7 @@ const scene = new THREE.Scene();
 scene.add(sky);
 
 // camera
-export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 100);
+export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 300);
 camera.position.set(0, 20, 50);
 camera.lookAt(houseGroup.position);
 scene.add(camera);
@@ -69,17 +69,49 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   // renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
-
 window.addEventListener("resize", onWindowResize);
+
+// fullscreen dblclick
+canvas.addEventListener("dblclick", () => {
+  const doc = document;
+  const isFullscreen =
+    doc.fullscreenElement ||
+    doc.webkitFullscreenElement ||
+    doc.mozFullScreenElement ||
+    doc.msFullscreenElement;
+
+  if (!isFullscreen) {
+    if (canvas.requestFullscreen) {
+      canvas.requestFullscreen();
+    } else if (canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen(); // Safari
+    } else if (canvas.mozRequestFullScreen) {
+      canvas.mozRequestFullScreen(); // Firefox старый
+    } else if (canvas.msRequestFullscreen) {
+      canvas.msRequestFullscreen(); // IE/Edge старый
+    }
+  } else {
+    if (doc.exitFullscreen) {
+      doc.exitFullscreen();
+    } else if (doc.webkitExitFullscreen) {
+      doc.webkitExitFullscreen();
+    } else if (doc.mozCancelFullScreen) {
+      doc.mozCancelFullScreen();
+    } else if (doc.msExitFullscreen) {
+      doc.msExitFullscreen();
+    }
+  }
+});
 
 // renderer
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
 });
-renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
