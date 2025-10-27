@@ -4,7 +4,6 @@ import { fullScene } from "./meshes/fullScene";
 import { sky } from "./sky";
 import { gsap } from "gsap/gsap-core";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-console.log(OrbitControls);
 
 // common settings
 const sizes = {
@@ -19,16 +18,17 @@ scene.add(sky);
 
 // camera
 export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 300);
-camera.position.set(0, 20, 50);
+camera.position.set(0, 10, 30); //remove
+// camera.position.set(0, 20, 50);
 camera.lookAt(houseGroup.position);
 scene.add(camera);
 
-gsap.to(camera.position, {
-  duration: 8,
-  z: 30,
-  y: 10,
-  ease: "back.inOut(4)",
-});
+// gsap.to(camera.position, {
+//   duration: 8,
+//   z: 30,
+//   y: 10,
+//   ease: "back.inOut(4)",
+// });
 
 // lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -115,6 +115,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.render(scene, camera);
 
 // animation
 const clock = new THREE.Clock();

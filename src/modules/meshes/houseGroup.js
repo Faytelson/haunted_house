@@ -1,30 +1,85 @@
 import * as THREE from "three";
 
 export const houseGroup = new THREE.Group();
-
-// walls
 const houseWidth = 6;
-const houseHeight = 3;
+const houseHeight = 3.5;
 const houseLength = 10;
 
+// WALLS
 const walls = new THREE.Mesh(
   new THREE.BoxGeometry(houseWidth, houseHeight, houseLength),
-  new THREE.MeshStandardMaterial({ color: 0x8b4513 }),
+  new THREE.MeshStandardMaterial({ color: 0x8b4513}),
 );
 walls.position.y = houseHeight / 2;
 houseGroup.add(walls);
 
-// roof
-const roofHeight = 3;
+// WINDOWS
+const windowOffsetY = 1;
 
-const roof = new THREE.Mesh(
-  new THREE.CylinderGeometry(1, 1, houseLength, 3, 1, false),
-  new THREE.MeshStandardMaterial({ color: 0xb35f45 }),
-);
-roof.position.z = 1;
+// ROOF
+const roofWidthHalf = houseWidth / 2;
+const roofHeight = 2.5;
+const roof = new THREE.Group();
+roof.position.y = houseHeight;
 houseGroup.add(roof);
 
-// door
+// gable
+const gableOffsetZ = houseLength / 2;
+
+const gableShape = new THREE.Shape();
+gableShape.moveTo(-roofWidthHalf, 0);
+gableShape.lineTo(0, roofHeight);
+gableShape.lineTo(roofWidthHalf, 0);
+gableShape.lineTo(-roofWidthHalf, 0);
+
+const gableGeometry = new THREE.ShapeGeometry(gableShape);
+const gable = new THREE.Mesh(
+  gableGeometry,
+  new THREE.MeshStandardMaterial({ color: 0x8b4513, side: THREE.DoubleSide }),
+);
+gable.position.z = -gableOffsetZ;
+roof.add(gable);
+
+// gableWindow
+const gableWindowShape = new THREE.Shape();
+gableWindowShape.moveTo(-roofWidthHalf, 0);
+gableWindowShape.lineTo(0, roofHeight);
+gableWindowShape.lineTo(roofWidthHalf, 0);
+gableWindowShape.lineTo(-roofWidthHalf, 0);
+
+const gableWindowRadius = 0.4;
+const holePath = new THREE.Path();
+holePath.absarc(0, windowOffsetY + gableWindowRadius, gableWindowRadius, 0, Math.PI * 2);
+gableWindowShape.holes.push(holePath);
+const gableWindowGeometry = new THREE.ShapeGeometry(gableWindowShape);
+const gableWindow = new THREE.Mesh(
+  gableWindowGeometry,
+  new THREE.MeshStandardMaterial({ color: 0x8b4513, side: THREE.DoubleSide }),
+);
+gableWindow.position.z = gableOffsetZ;
+roof.add(gableWindow);
+
+// slopes
+const slopeHeight = Math.sqrt(roofWidthHalf ** 2 + roofHeight ** 2);
+const slopeAngle = Math.acos(roofWidthHalf / slopeHeight);
+
+const leftSlope = new THREE.Mesh(
+  new THREE.PlaneGeometry(houseLength + 0.8, slopeHeight, 1, 1),
+  new THREE.MeshStandardMaterial({ color: 0x567e3a, side: THREE.DoubleSide }),
+);
+leftSlope.geometry.rotateY(Math.PI / 2);
+leftSlope.rotation.z = -(Math.PI / 2 - slopeAngle);
+const slopeOffsetX = (slopeHeight / 2) * Math.cos(slopeAngle);
+const slopeOffsetY = (slopeHeight / 2) * Math.sin(slopeAngle);
+leftSlope.position.x = -slopeOffsetX;
+leftSlope.position.y = slopeOffsetY;
+
+const rightSlope = leftSlope.clone();
+rightSlope.rotation.z = Math.PI / 2 - slopeAngle;
+rightSlope.position.x = slopeOffsetX;
+roof.add(leftSlope, rightSlope);
+
+// DOOR
 const doorWidth = 1.4;
 const doorHeight = 2;
 
@@ -36,13 +91,13 @@ door.position.y = doorHeight / 2;
 door.position.z = houseLength / 2 + 0.01;
 houseGroup.add(door);
 
-// fence
+// FENCE
 const fenceWidth = 50;
 const fenceHeight = 2;
 const fenceThickness = 0.05;
 const gatesWidth = 4;
-
 const fenceMaterial = new THREE.MeshStandardMaterial({ color: 0x8b4513 });
+
 // left front
 const fenceFrontLeft = new THREE.Mesh(
   new THREE.BoxGeometry(fenceWidth / 2 - gatesWidth / 2, fenceHeight, fenceThickness),
@@ -83,7 +138,6 @@ fenceRight.position.set(fenceWidth / 2 + fenceThickness, fenceHeight / 2, 0);
 fenceRight.rotation.y = Math.PI / 2;
 
 houseGroup.add(fenceFrontLeft, fenceFrontRight, fenceBack, fenceLeft, fenceRight);
-
 houseGroup.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
