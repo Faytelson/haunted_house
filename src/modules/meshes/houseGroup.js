@@ -9,7 +9,7 @@ const houseLength = 10;
 // WALLS
 const walls = new THREE.Mesh(
   new THREE.BoxGeometry(houseWidth, houseHeight, houseLength),
-  new THREE.MeshStandardMaterial({ color: 0x8b4513}),
+  new THREE.MeshStandardMaterial({ color: 0x8b4513 }),
 );
 walls.position.y = houseHeight / 2;
 houseGroup.add(walls);
@@ -26,14 +26,21 @@ houseGroup.add(roof);
 
 // gable
 const gableOffsetZ = houseLength / 2;
+const positionsArray = new Float32Array([
+  -roofWidthHalf,
+  0,
+  0,
+  0,
+  roofHeight,
+  0,
+  roofWidthHalf,
+  0,
+  0,
+]);
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
+const gableGeometry = new THREE.BufferGeometry();
+gableGeometry.setAttribute("position", positionsAttribute);
 
-const gableShape = new THREE.Shape();
-gableShape.moveTo(-roofWidthHalf, 0);
-gableShape.lineTo(0, roofHeight);
-gableShape.lineTo(roofWidthHalf, 0);
-gableShape.lineTo(-roofWidthHalf, 0);
-
-const gableGeometry = new THREE.ShapeGeometry(gableShape);
 const gable = new THREE.Mesh(
   gableGeometry,
   new THREE.MeshStandardMaterial({ color: 0x8b4513, side: THREE.DoubleSide }),
