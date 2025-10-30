@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { getOffsetByAngle } from "../../utils";
 
 export const houseGroup = new THREE.Group();
 const houseWidth = 6;
@@ -62,21 +63,23 @@ roof.add(gableWindow);
 // slopes
 const slopeHeight = Math.sqrt(roofWidthHalf ** 2 + roofHeight ** 2);
 const slopeAngle = Math.acos(roofWidthHalf / slopeHeight);
+const slopeOffset = 0.6;
+const slopeHeightWithOffset = slopeHeight + slopeOffset;
 
 const leftSlope = new THREE.Mesh(
-  new THREE.PlaneGeometry(houseLength + 0.8, slopeHeight, 1, 1),
+  new THREE.PlaneGeometry(houseLength + 0.8, slopeHeightWithOffset, 1, 1),
   new THREE.MeshStandardMaterial({ color: 0x567e3a, side: THREE.DoubleSide }),
 );
 leftSlope.geometry.rotateY(Math.PI / 2);
 leftSlope.rotation.z = -(Math.PI / 2 - slopeAngle);
-const slopeOffsetX = (slopeHeight / 2) * Math.cos(slopeAngle);
-const slopeOffsetY = (slopeHeight / 2) * Math.sin(slopeAngle);
-leftSlope.position.x = -slopeOffsetX;
-leftSlope.position.y = slopeOffsetY;
+const [slopeOffsetX, slopeOffsetY] = getOffsetByAngle(slopeHeight / 2, slopeAngle);
+const [slopeOffsetX2, slopeOffsetY2] = getOffsetByAngle(slopeOffset / 2, slopeAngle);
+leftSlope.position.x = -slopeOffsetX - slopeOffsetX2;
+leftSlope.position.y = slopeOffsetY - slopeOffsetY2;
 
 const rightSlope = leftSlope.clone();
 rightSlope.rotation.z = Math.PI / 2 - slopeAngle;
-rightSlope.position.x = slopeOffsetX;
+rightSlope.position.x = slopeOffsetX + slopeOffsetX2;
 roof.add(leftSlope, rightSlope);
 
 // DOOR
