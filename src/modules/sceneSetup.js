@@ -122,7 +122,7 @@ const clock = new THREE.Clock();
 const loop = () => {
   // анимация вращения всех объектов
   const elapsedTime = clock.getElapsedTime();
-  fullScene.rotation.y = (elapsedTime * Math.PI) / 12;
+  // fullScene.rotation.y = (elapsedTime * Math.PI) / 12;
 
   controls.update();
   renderer.render(scene, camera);
