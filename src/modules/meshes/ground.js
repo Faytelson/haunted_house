@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
-export const plane = new THREE.Mesh(
+export const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(200, 200),
   new THREE.MeshStandardMaterial({ color: 0xa9c388 }),
 );
 
-plane.rotation.x = -Math.PI / 2;
-plane.receiveShadow = true;
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;

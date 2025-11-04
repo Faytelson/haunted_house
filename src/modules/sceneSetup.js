@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { houseGroup } from "./meshes/houseGroup";
 import { fullScene } from "./meshes/fullScene";
 import { sky } from "./sky";
 import { gsap } from "gsap/gsap-core";
@@ -20,7 +19,6 @@ scene.add(sky);
 export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 300);
 camera.position.set(0, 10, 30); //remove
 // camera.position.set(0, 20, 50);
-camera.lookAt(houseGroup.position);
 scene.add(camera);
 
 // gsap.to(camera.position, {

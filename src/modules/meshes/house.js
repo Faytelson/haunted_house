@@ -1,8 +1,7 @@
 import * as THREE from "three";
 import { getOffsetByAngle } from "../../utils";
-import * as fenceTexture from "../textures/fenceTextures";
 
-export const houseGroup = new THREE.Group();
+export const house = new THREE.Group();
 const houseWidth = 6;
 const houseHeight = 3.5;
 const houseLength = 10;
@@ -13,7 +12,7 @@ const walls = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ color: 0x8b4513 }),
 );
 walls.position.y = houseHeight / 2;
-houseGroup.add(walls);
+house.add(walls);
 
 // WINDOWS
 const windowOffsetY = 1;
@@ -23,7 +22,7 @@ const roofWidthHalf = houseWidth / 2;
 const roofHeight = 2.5;
 const roof = new THREE.Group();
 roof.position.y = houseHeight;
-houseGroup.add(roof);
+house.add(roof);
 
 // gable
 const gableOffsetZ = houseLength / 2;
@@ -100,78 +99,11 @@ const door = new THREE.Mesh(
 );
 door.position.y = doorHeight / 2;
 door.position.z = houseLength / 2 + 0.01;
-houseGroup.add(door);
+house.add(door);
 
-// FENCE
-const fenceWidth = 50;
-const fenceHeight = 2;
-const fenceThickness = 0.05;
-const gatesWidth = 4;
-
-const fenceMaterial = new THREE.MeshStandardMaterial({
-  map: fenceTexture.color, // Base color / diffuse
-  alphaMap: fenceTexture.alpha, // прозрачность
-  aoMap: fenceTexture.ambientOcclusion, // ambient occlusion (тень в щелях)
-  aoMapIntensity: 1.0, // сила AO
-  normalMap: fenceTexture.normal, // рельеф / бамп
-  roughnessMap: fenceTexture.roughness, // шероховатость
-  displacementMap: fenceTexture.height, // сама геометрия поднимается/падает
-  displacementScale: 0.001,
-  transparent: true, // чтобы alphaMap работала
-  side: THREE.DoubleSide,
-});
-
-// left front
-const fenceHalfGeometry = new THREE.BoxGeometry(
-  fenceWidth / 2 - gatesWidth / 2,
-  fenceHeight,
-  fenceThickness,
-);
-fenceHalfGeometry.computeBoundingBox();
-const fenceHalfWidth = fenceHalfGeometry.boundingBox.max.x - fenceHalfGeometry.boundingBox.min.x;
-fenceTexture.color.wrapS = THREE.RepeatWrapping;
-fenceTexture.color.wrapT = THREE.ClampToEdgeWrapping;
-fenceTexture.color.repeat.set(fenceHalfWidth, 1);
-// fenceTexture.color.minFilter = THREE.NearestFilter;
-
-const fenceFrontLeft = new THREE.Mesh(fenceHalfGeometry, fenceMaterial);
-fenceFrontLeft.position.set(
-  -(fenceWidth / 4 + gatesWidth / 4),
-  fenceHeight / 2,
-  fenceWidth / 2 - fenceThickness,
-);
-
-// right front
-const fenceFrontRight = new THREE.Mesh(fenceHalfGeometry, fenceMaterial);
-fenceFrontRight.position.set(
-  fenceWidth / 4 + gatesWidth / 4,
-  fenceHeight / 2,
-  fenceWidth / 2 - fenceThickness,
-);
-
-// back
-const fenceBack = new THREE.Mesh(
-  new THREE.BoxGeometry(fenceWidth, fenceHeight, fenceThickness),
-  fenceMaterial,
-);
-fenceBack.position.set(0, fenceHeight / 2, -(fenceWidth / 2 - fenceThickness));
-
-// left
-const fenceLeft = fenceBack.clone();
-fenceLeft.position.set(-(fenceWidth / 2 + fenceThickness), fenceHeight / 2, 0);
-fenceLeft.rotation.y = Math.PI / 2;
-
-// right
-const fenceRight = fenceBack.clone();
-fenceRight.position.set(fenceWidth / 2 + fenceThickness, fenceHeight / 2, 0);
-fenceRight.rotation.y = Math.PI / 2;
-
-houseGroup.add(fenceFrontLeft, fenceFrontRight, fenceBack, fenceLeft, fenceRight);
-houseGroup.traverse((child) => {
+house.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
     child.receiveShadow = false;
   }
 });
-
-new THREE.TextureLoader().load("textures/grass/ground_grass_color.jpg");
