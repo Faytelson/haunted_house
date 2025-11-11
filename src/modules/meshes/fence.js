@@ -21,16 +21,18 @@ const fenceMaterial = new THREE.MeshStandardMaterial({
 });
 
 // left front
+const wrapX = 20;
 const fenceHalfGeometry = new THREE.BoxGeometry(
   fenceWidth / 2 - gatesWidth / 2,
   fenceHeight,
   fenceThickness,
+  50, 50, 50,
 );
-fenceHalfGeometry.computeBoundingBox();
-const fenceHalfWidth = fenceHalfGeometry.boundingBox.max.x - fenceHalfGeometry.boundingBox.min.x;
-fenceTexture.color.wrapS = THREE.RepeatWrapping;
-fenceTexture.color.wrapT = THREE.ClampToEdgeWrapping;
-fenceTexture.color.repeat.set(fenceHalfWidth, 1);
+for (const key in fenceTexture) {
+  fenceTexture[key].repeat.x = wrapX;
+  fenceTexture[key].wrapS = THREE.RepeatWrapping;
+  fenceTexture[key].wrapT = THREE.ClampToEdgeWrapping;
+}
 // fenceTexture.color.minFilter = THREE.NearestFilter;
 
 const fenceFrontLeft = new THREE.Mesh(fenceHalfGeometry, fenceMaterial);
