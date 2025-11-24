@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import * as fenceTexture from "../textures/fenceTextures";
-const fenceWidth = 50;
+
+export const fenceWidth = 50;
 const fenceHeight = 2;
 const fenceThickness = 0.05;
-const gatesWidth = 4;
-
+export const gatesWidth = 3;
 export const fence = new THREE.Group();
 
 const fenceMaterial = new THREE.MeshStandardMaterial({

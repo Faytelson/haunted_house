@@ -1,9 +1,19 @@
 import { textureLoader } from "../loaders";
 
-const color = textureLoader.load("textures/grass/Grass_002_COLOR.jpg");
-const ambientOcclusion = textureLoader.load("textures/grass/Grass_002_OCC.jpg");
-const height = textureLoader.load("textures/grass/Grass_002_DISP.png");
-const normal = textureLoader.load("textures/grass/Grass_002_NORM.jpg");
-const roughness = textureLoader.load("textures/grass/Grass_002_ROUGH.jpg");
+const color = textureLoader.load(
+  "textures/grass/Poliigon_GrassPatchyGround_4585_BaseColor.jpg",
+);
+const metalNess = textureLoader.load(
+  "public/textures/grass/Poliigon_GrassPatchyGround_4585_Metallic.jpg",
+);
+const height = textureLoader.load(
+  "textures/grass/Poliigon_GrassPatchyGround_4585_Displacement.png",
+);
+const normal = textureLoader.load(
+  "textures/grass/Poliigon_GrassPatchyGround_4585_Normal.png",
+);
+const roughness = textureLoader.load(
+  "textures/grass/Poliigon_GrassPatchyGround_4585_Roughness.jpg",
+);
 
-export { color, ambientOcclusion, height, normal, roughness };
+export { color, metalNess, height, normal, roughness };
