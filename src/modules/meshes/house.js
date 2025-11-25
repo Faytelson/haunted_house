@@ -20,7 +20,6 @@ const wallsMaterial = new THREE.MeshStandardMaterial({
   displacementScale: 0.002,
   side: THREE.DoubleSide,
 });
-wallsMaterial.color.set(0xabbd7f);
 
 for (const key in houseWallsTexture) {
   houseWallsTexture[key].repeat.x = 2.5;
@@ -28,6 +27,7 @@ for (const key in houseWallsTexture) {
   houseWallsTexture[key].wrapT = THREE.ClampToEdgeWrapping;
   houseWallsTexture[key].offset.x = 0.32;
 }
+houseWallsTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 const walls = new THREE.Mesh(
   new THREE.BoxGeometry(houseWidth, houseHeight, houseLength, 50, 50, 50),
@@ -120,7 +120,7 @@ const leftSlope = new THREE.Mesh(
   new THREE.MeshStandardMaterial({
     map: roofTexture.color,
     aoMap: roofTexture.ambientOcclusion,
-    aoMapIntensity: 1.0,
+    aoMapIntensity: 2.0,
     normalMap: roofTexture.normal,
     roughnessMap: roofTexture.roughness,
     displacementMap: roofTexture.height,
@@ -128,6 +128,7 @@ const leftSlope = new THREE.Mesh(
     side: THREE.DoubleSide,
   }),
 );
+roofTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 leftSlope.geometry.rotateY(Math.PI / 2);
 leftSlope.rotation.z = -(Math.PI / 2 - slopeAngle);
@@ -160,23 +161,22 @@ for (const key in roofTexture) {
 const doorWidth = 1.4 * 1.5;
 const doorHeight = 2;
 
-const door = new THREE.Mesh(
-  new THREE.PlaneGeometry(doorWidth, doorHeight, 50, 50),
-  new THREE.MeshStandardMaterial({
-    map: doorTexture.color,
-    aoMap: doorTexture.ambientOcclusion,
-    aoMapIntensity: 1.0,
-    normalMap: doorTexture.normal,
-    roughnessMap: doorTexture.roughness,
-    displacementMap: doorTexture.height,
-    displacementScale: 0.06,
-    alphaMap: doorTexture.alpha,
-    transparent: true,
-    metalnessMap: doorTexture.metalness,
-    metalness: 0.7,
-    side: THREE.DoubleSide,
-  }),
-);
+const doorMaterial = new THREE.MeshStandardMaterial({
+  map: doorTexture.color,
+  aoMap: doorTexture.ambientOcclusion,
+  aoMapIntensity: 1.0,
+  normalMap: doorTexture.normal,
+  roughnessMap: doorTexture.roughness,
+  displacementMap: doorTexture.height,
+  displacementScale: 0.06,
+  alphaMap: doorTexture.alpha,
+  transparent: true,
+  metalnessMap: doorTexture.metalness,
+  metalness: 0.7,
+  side: THREE.DoubleSide,
+});
+doorMaterial.color.set(0x999999);
+const door = new THREE.Mesh(new THREE.PlaneGeometry(doorWidth, doorHeight, 50, 50), doorMaterial);
 door.position.y = doorHeight / 2 + 0.1;
 door.position.z = houseLength / 2 + 0.01;
 house.add(door);

@@ -1,101 +1,177 @@
 import * as THREE from "three";
-import { gltfLoader } from "../loaders";
+import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../createInstancedMesh.js";
 
-// trees group
-const treesGroupGltf = await gltfLoader.loadAsync("models/trees_group/scene.gltf");
-const treesGroup = treesGroupGltf.scene;
-treesGroup.scale.set(4, 4, 4);
-treesGroup.position.x = -10;
-treesGroup.position.z = -30;
-treesGroup.traverse((child) => {
+// tree
+const treeScene = await loadScene("models/tree/scene.gltf");
+treeScene.position.x = -22;
+treeScene.position.z = 5.8;
+treeScene.scale.set(0.2, 0.2, 0.2);
+treeScene.castShadow = true;
+
+// trees
+const treesScene = await loadScene("models/trees_group/scene.gltf");
+treesScene.scale.set(4, 4, 4);
+treesScene.position.x = -10;
+treesScene.position.z = -30;
+treesScene.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+  }
+});
+
+// forest trees
+const forestTreesScene = await loadScene("models/trees_and_bush/scene.gltf");
+forestTreesScene.scale.set(0.2, 0.2, 0.2);
+forestTreesScene.position.x = -15;
+forestTreesScene.position.z = -34;
+forestTreesScene.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
   }
 });
 
 // plants
-const plantsGltf = await gltfLoader.loadAsync("models/plant_outdoors/scene.gltf");
-const plants = plantsGltf.scene;
-
-let plantMesh;
-plants.traverse((child) => {
-  if (child.isMesh && !plantMesh) plantMesh = child;
-});
-const countPlantsX = 16;
-const countPlantsZ = 13;
-const totalPlants = countPlantsX * countPlantsZ;
-const instancedPlants = new THREE.InstancedMesh(
-  plantMesh.geometry,
-  plantMesh.material,
-  totalPlants,
+const plantScene = await loadScene("models/plant_outdoors/scene.gltf");
+const plantMeshes = getMeshesFromScene(plantScene);
+const instancedPlantsArray = createInstancedMeshes(
+  {
+    countInRow: 16,
+    countInColumn: 13,
+    stepInRow: 1.2,
+    stepInColumn: 2.2,
+    rangeInRow: 0.6,
+    rangeInColumn: 0.4,
+    scale: 0.16,
+    rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+  },
+  plantMeshes,
 );
+const plantsGroup = new THREE.Group();
+instancedPlantsArray.forEach((instancedMesh) => {
+  plantsGroup.add(instancedMesh);
+});
+plantsGroup.position.x = 5;
+plantsGroup.position.y = 0.2;
+plantsGroup.position.z = -4;
 
-const dummyPlant = new THREE.Object3D();
-let matrixPlantCounter = 0;
-
-const plantStepX = 1.2;
-const plantStepZ = 2.2;
-
-for (let x = 0; x < countPlantsX; x++) {
-  for (let z = 0; z < countPlantsZ; z++) {
-    const offsetX = (Math.random() - 0.5) * 0.6;
-    const offsetZ = (Math.random() - 0.5) * 0.4;
-    dummyPlant.position.set(x * plantStepX + offsetX, 0, z * plantStepZ + offsetZ);
-    dummyPlant.scale.set(0.2, 0.2, 0.2);
-    dummyPlant.rotation.set(-Math.PI / 2, 0, 0);
-    dummyPlant.updateMatrix();
-    instancedPlants.setMatrixAt(matrixPlantCounter++, dummyPlant.matrix);
-  }
-}
-instancedPlants.castShadow = true;
-instancedPlants.receiveShadow = true;
-instancedPlants.instanceMatrix.needsUpdate = true;
-instancedPlants.position.x = 5;
-instancedPlants.position.y = 0.2;
-instancedPlants.position.z = -4;
-
-// tree
-const treeGltf = await gltfLoader.loadAsync("models/tree/scene.gltf");
-const tree = treeGltf.scene;
-tree.position.x = -21;
-tree.position.z = -20;
-tree.scale.set(0.2, 0.2, 0.2);
-tree.castShadow = true;
+const instancedPlantsArray2 = createInstancedMeshes(
+  {
+    countInRow: 6,
+    countInColumn: 10,
+    stepInRow: 1.2,
+    stepInColumn: 2,
+    rangeInRow: 0.6,
+    rangeInColumn: 0.4,
+    scale: 0.16,
+    rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+  },
+  plantMeshes,
+);
+const plantsGroup2 = new THREE.Group();
+instancedPlantsArray2.forEach((instancedMesh) => {
+  plantsGroup2.add(instancedMesh);
+});
+plantsGroup2.rotateY(Math.PI /2);
+plantsGroup2.position.x = -25 + 1.4;
+plantsGroup2.position.y = 0.2;
+plantsGroup2.position.z = 3.7;
 
 // wheat
-const wheatGltf = await gltfLoader.loadAsync("models/wheat_grass/tdcrdbur_tier_3.gltf");
-const wheat = wheatGltf.scene;
-let wheatMesh;
-wheat.traverse((child) => {
-  if (child.isMesh && !wheatMesh) wheatMesh = child;
+const wheatScene = await loadScene("models/wheat_grass/tdcrdbur_tier_3.gltf");
+const wheatMeshes = getMeshesFromScene(wheatScene);
+const instancedWheatArray = createInstancedMeshes(
+  {
+    countInRow: 12,
+    countInColumn: 20,
+    stepInRow: 0.6,
+    stepInColumn: 1,
+    rangeInRow: 0.6,
+    rangeInColumn: 0.4,
+    scale: 0.01,
+    rotation: new THREE.Euler(Math.PI / 2, 0, 0),
+  },
+  wheatMeshes,
+);
+const wheatGroup = new THREE.Group();
+instancedWheatArray.forEach((instancedMesh) => {
+  wheatGroup.add(instancedMesh);
 });
-const countWheatX = 20;
-const countWheatZ = 20;
-const totalWheat = countWheatX * countWheatZ;
-const instancedWheat = new THREE.InstancedMesh(wheatMesh.geometry, wheatMesh.material, totalWheat);
+wheatGroup.rotation.set(0, Math.PI / 2, 0);
+wheatGroup.position.x = -25 + 2.2;
+wheatGroup.position.z = 25 - 1.6;
 
-const dummyWheat = new THREE.Object3D();
-let matrixWheatCounter = 0;
+// kalmia latifolia bushes
+const kalmiaBushScene = await loadScene("models/kalmia_latifolia_galaxy/scene.gltf");
+const kalmiaBushMeshes = getMeshesFromScene(kalmiaBushScene);
+const instancedKalmiaBushArray = createInstancedMeshes(
+  {
+    countInRow: 2,
+    countInColumn: 8,
+    stepInRow: 3,
+    stepInColumn: 2,
+    rangeInRow: 0.4,
+    rangeInColumn: 0.4,
+    scale: 0.01,
+  },
+  kalmiaBushMeshes,
+);
+const kalmiaBushGroup = new THREE.Group();
+instancedKalmiaBushArray.forEach((instancedMesh) => {
+  kalmiaBushGroup.add(instancedMesh);
+});
+kalmiaBushGroup.position.x = -1.6;
+kalmiaBushGroup.position.z = 9.5;
 
-const wheatStepX = 0.4;
-const wheatStepZ = 0.9;
+// ribbon grass
+const ribbonGrassScene = await loadScene("models/ribbon_grass/tbdpec3r_tier_3.gltf");
+const ribbonGrassMeshes = getMeshesFromScene(ribbonGrassScene);
+const instancedRibbonGrassArray = createInstancedMeshes(
+  {
+    countInRow: 12,
+    countInColumn: 20,
+    stepInRow: 0.6,
+    stepInColumn: 1,
+    rangeInRow: 0.6,
+    rangeInColumn: 0.4,
+    scale: 0.01,
+    rotation: new THREE.Euler(Math.PI / 2, 0, 0),
+  },
+  ribbonGrassMeshes,
+);
+const ribbonGrassGroup = new THREE.Group();
+instancedRibbonGrassArray.forEach((instancedMesh) => {
+  ribbonGrassGroup.add(instancedMesh);
+});
+ribbonGrassGroup.rotation.set(0, Math.PI / 2, 0);
+ribbonGrassGroup.position.x = -25 + 2;
+ribbonGrassGroup.position.y = 0.4;
+ribbonGrassGroup.position.z = 25 - 10.6;
 
-for (let x = 0; x < countWheatX; x++) {
-  for (let z = 0; z < countWheatZ; z++) {
-    const offsetX = (Math.random() - 0.5) * 0.6;
-    const offsetZ = (Math.random() - 0.5) * 0.4;
-    dummyWheat.position.set(x * wheatStepX + offsetX, 0, z * wheatStepZ + offsetZ);
-    dummyWheat.scale.set(0.01, 0.01, 0.01);
-    dummyWheat.rotation.set(Math.PI / 2, 0, 0);
-    dummyWheat.updateMatrix();
-    instancedWheat.setMatrixAt(matrixWheatCounter++, dummyWheat.matrix);
-  }
-}
-instancedWheat.castShadow = true;
-instancedWheat.receiveShadow = true;
-instancedWheat.instanceMatrix.needsUpdate = true;
-instancedWheat.rotation.set(0, Math.PI / 2, 0);
-instancedWheat.position.x = -25 + 2.2;
-instancedWheat.position.z = 25 - 2;
 
-export { treesGroup, instancedPlants, tree, instancedWheat };
+// grass vegetation
+// const grassVegetationScene = await loadScene("models/grass_vegetation/scene.gltf");
+// grassVegetationScene.scale.set(4, 4, 4);
+// grassVegetationScene.position.x = 20;
+// grassVegetationScene.position.z = -20;
+// grassVegetationScene.traverse((child) => {
+//   if (child.isMesh) {
+//     child.castShadow = true;
+//   }
+// });
+
+// realistic grass
+// const realisticGrassScene = await loadScene("models/realistic_grass/scene.gltf");
+// realisticGrassScene.scale.set(4, 4, 4);
+// realisticGrassScene.position.x = 15;
+// realisticGrassScene.position.z = -15;
+
+export {
+  treesScene,
+  forestTreesScene,
+  plantsGroup,
+  plantsGroup2,
+  treeScene,
+  wheatGroup,
+  kalmiaBushGroup,
+  ribbonGrassGroup,
+};

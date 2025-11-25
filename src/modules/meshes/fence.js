@@ -33,7 +33,7 @@ for (const key in fenceTexture) {
   fenceTexture[key].wrapS = THREE.RepeatWrapping;
   fenceTexture[key].wrapT = THREE.ClampToEdgeWrapping;
 }
-// fenceTexture.color.minFilter = THREE.NearestFilter;
+fenceTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 const fenceFrontLeft = new THREE.Mesh(fenceHalfGeometry, fenceMaterial);
 fenceFrontLeft.position.set(
