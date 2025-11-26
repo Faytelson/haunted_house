@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import * as fenceTexture from "../textures/fenceTextures";
 
-export const fenceWidth = 50;
+export const fenceWidth = 35;
 const fenceHeight = 2;
 const fenceThickness = 0.05;
 export const gatesWidth = 3;
