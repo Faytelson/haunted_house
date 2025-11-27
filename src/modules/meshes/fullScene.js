@@ -6,7 +6,14 @@ import { gardenBedLGGroup } from "./gardenBeds/gardenBedLG";
 import { gardenBedMD1Group } from "./gardenBeds/gardenBedMD1";
 import { gardenBedMD2Group } from "./gardenBeds/gardenBedMD2";
 import { gardenBedMD3Group } from "./gardenBeds/gardenBedMD3";
-import { treeScene, treeGroup, forestTreesScene1, kalmiaBushGroup } from "./plants";
+import {
+  treeGroup,
+  bushGroup,
+  berryPlantGroup,
+  grassGroup,
+  forestTreesScene1,
+  kalmiaBushGroup,
+} from "./plants";
 
 export const fullScene = new THREE.Group();
 fullScene.add(
@@ -18,7 +25,9 @@ fullScene.add(
   gardenBedMD2Group,
   gardenBedMD3Group,
   forestTreesScene1,
-  treeScene,
   treeGroup,
+  bushGroup,
+  berryPlantGroup,
+  grassGroup,
   kalmiaBushGroup,
 );

@@ -2,47 +2,130 @@ import * as THREE from "three";
 import { fenceWidth } from "./fence.js";
 import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../createInstancedMesh.js";
 
-// tree
-const treeScene = await loadScene("models/tree/scene.gltf");
-treeScene.position.x = -13;
-treeScene.position.z = 2;
-treeScene.scale.set(0.2, 0.2, 0.2);
-treeScene.castShadow = true;
-
-function cloneTreeScene(scene) {
+function cloneScene(scene) {
   const clone = scene.clone(true);
-
   clone.traverse((obj) => {
     if (obj.isMesh && obj.material) {
       obj.material = obj.material.clone();
     }
   });
-
   return clone;
 }
 
+// tree
+const treeScene = await loadScene("models/tree/scene.gltf");
 const treeGroup = new THREE.Group();
-const tree1 = cloneTreeScene(treeScene);
+
+const tree1 = cloneScene(treeScene);
 tree1.position.x = 0;
 tree1.position.z = 0;
-tree1.scale.set(0.25, 0.25, 0.25);
+tree1.scale.set(0.29, 0.29, 0.29);
+tree1.rotation.y = Math.PI / 4;
 treeGroup.add(tree1);
 
-const tree2 = cloneTreeScene(treeScene);
+const tree2 = cloneScene(treeScene);
 tree2.position.x = 3;
 tree2.position.z = 2;
 tree2.scale.set(0.18, 0.18, 0.18);
 treeGroup.add(tree2);
 
-const tree3 = cloneTreeScene(treeScene);
+const tree3 = cloneScene(treeScene);
 tree3.position.x = 1;
 tree3.position.z = 3;
 tree3.scale.set(0.22, 0.22, 0.22);
 treeGroup.add(tree3);
+
+const tree4 = cloneScene(treeScene);
+tree4.position.x = 2;
+tree4.position.z = 17;
+tree4.scale.set(0.22, 0.22, 0.22);
+treeGroup.add(tree4);
+
 treeGroup.position.x = -fenceWidth / 2 + 1;
 treeGroup.position.z = -15;
 
-// trees
+// bushes
+const bushScene = await loadScene("models/green_bush/scene.gltf");
+const bushGroup = new THREE.Group();
+
+const bush1 = cloneScene(bushScene);
+bush1.position.x = 0;
+bush1.position.z = 0;
+bush1.scale.set(2, 2, 2);
+bushGroup.add(bush1);
+
+const bush2 = cloneScene(bushScene);
+bush2.position.x = 7;
+bush2.position.z = 2;
+bush2.scale.set(2.5, 2.5, 2.5);
+bushGroup.add(bush2);
+
+const bush3 = cloneScene(bushScene);
+bush3.position.x = 2.5;
+bush3.position.z = 2.5;
+bush3.scale.set(2.2, 2.2, 2.2);
+bushGroup.add(bush3);
+
+const bush4 = cloneScene(bushScene);
+bush4.position.x = 4.5;
+bush4.position.z = -1;
+bush4.scale.set(2, 2, 2);
+bushGroup.add(bush4);
+
+bushGroup.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+    child.rotation.y = Math.PI;
+  }
+});
+bushGroup.position.x = -fenceWidth / 2 + 4;
+bushGroup.position.z = -14;
+
+// grass in the backyard
+const berryPlantScene = await loadScene("models/stylized_berry_plant/scene.gltf");
+const berryPlantMeshes = getMeshesFromScene(berryPlantScene);
+const instancedBerryPlantArray = createInstancedMeshes(
+  {
+    countInRow: 4,
+    countInColumn: 5,
+    stepInRow: 4,
+    stepInColumn: 2,
+    rangeInRow: 2,
+    rangeInColumn: 1.5,
+    scale: 1.4,
+    rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+  },
+  berryPlantMeshes,
+);
+const berryPlantGroup = new THREE.Group();
+instancedBerryPlantArray.forEach((instancedMesh) => {
+  berryPlantGroup.add(instancedMesh);
+});
+berryPlantGroup.position.x = -fenceWidth / 2 + 2;
+berryPlantGroup.position.z = -fenceWidth / 2 + 3.5;
+
+// grass in the frontyard
+const instancedGrassArray = createInstancedMeshes(
+  {
+    countInRow: 2,
+    countInColumn: 7,
+    stepInRow: 6,
+    stepInColumn: 1.5,
+    rangeInRow: 0.4,
+    rangeInColumn: 0.6,
+    scale: 0.6,
+    rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+  },
+  berryPlantMeshes,
+);
+const grassGroup = new THREE.Group();
+instancedGrassArray.forEach((instancedMesh) => {
+  grassGroup.add(instancedMesh);
+});
+grassGroup.position.x = -3;
+grassGroup.position.z = 7;
+
+// forest trees
 const forestTreesScene1 = await loadScene("models/lodbillboard_summer_trees_pack/scene.gltf");
 forestTreesScene1.scale.set(0.4, 0.4, 0.4);
 forestTreesScene1.position.x = -10;
@@ -75,4 +158,4 @@ instancedKalmiaBushArray.forEach((instancedMesh) => {
 kalmiaBushGroup.position.x = -1.6;
 kalmiaBushGroup.position.z = 8;
 
-export { treeScene, treeGroup, forestTreesScene1, kalmiaBushGroup };
+export { treeGroup, bushGroup, berryPlantGroup, grassGroup, forestTreesScene1, kalmiaBushGroup };
