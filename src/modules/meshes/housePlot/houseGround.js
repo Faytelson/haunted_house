@@ -63,4 +63,4 @@ houseGround.traverse((child) => {
   }
 });
 
-export { houseGround };
+export { houseGround, grassMaterial };

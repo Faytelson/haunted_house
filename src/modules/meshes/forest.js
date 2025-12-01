@@ -4,20 +4,22 @@ import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../createI
 // forest trees
 const forest = new THREE.Group();
 
-const forestTreesScene = await loadScene("models/green_bush/scene.gltf");
+const forestTreesScene = await loadScene("models/forest_trees/scene.gltf");
 const forestTreesMeshes = getMeshesFromScene(forestTreesScene);
+const filteredForestTreesMeshes = forestTreesMeshes.filter(
+  (mesh) => mesh.name !== "SM_FreeTree_07_Free_Tree_M_0" && mesh.name !== "SM_FreeTree_04_Free_Tree_M_0",
+);
 const instancedForestTreesArray = createInstancedMeshes(
   {
-    countInRow: 16,
-    countInColumn: 8,
-    stepInRow: 6,
-    stepInColumn: 20,
+    countInRow: 19,
+    countInColumn: 10,
+    stepInRow: 10,
+    stepInColumn: 15,
     rangeInRow: 5,
     rangeInColumn: 6,
-    scale: 6,
-    rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+    scale: 0.02,
   },
-  forestTreesMeshes,
+  filteredForestTreesMeshes,
 );
 const forestTreesGroup = new THREE.Group();
 instancedForestTreesArray.forEach((instancedMesh) => {
@@ -29,6 +31,7 @@ forestTreesGroup.position.z = -170;
 forestTreesGroup.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
+    child.scale.y = Math.random() * 0.5 + 0.8;
   }
 });
 forest.add(forestTreesGroup);

@@ -5,11 +5,11 @@ import * as roofTexture from "../../textures/roofTextures";
 import * as doorTexture from "../../textures/doorTextures";
 
 const house = new THREE.Group();
-const houseWidth = 8;
-const houseHeight = 3.5;
+const houseWidth = 7;
 const houseLength = 10;
 
 // WALLS
+const firstFloorHeight = 3.5;
 const wallsMaterial = new THREE.MeshStandardMaterial({
   map: houseWallsTexture.color,
   aoMap: houseWallsTexture.ambientOcclusion,
@@ -30,17 +30,17 @@ for (const key in houseWallsTexture) {
 houseWallsTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 const walls = new THREE.Mesh(
-  new THREE.BoxGeometry(houseWidth, houseHeight, houseLength, 50, 50, 50),
+  new THREE.BoxGeometry(houseWidth, firstFloorHeight, houseLength, 50, 50, 50),
   wallsMaterial,
 );
-walls.position.y = houseHeight / 2;
+walls.position.y = firstFloorHeight / 2;
 house.add(walls);
 
 // SECOND FLOOR
 const houseWidthHalf = houseWidth / 2;
 const secondFloorHeight = 3;
 const secondFloor = new THREE.Group();
-secondFloor.position.y = houseHeight;
+secondFloor.position.y = firstFloorHeight;
 house.add(secondFloor);
 
 // gable

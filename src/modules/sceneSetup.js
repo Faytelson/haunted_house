@@ -16,7 +16,7 @@ const scene = new THREE.Scene();
 scene.add(sky);
 
 // camera
-export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 1000);
+export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 3000);
 camera.position.set(0, 10, 30); //remove
 // camera.position.set(0, 20, 50);
 scene.add(camera);

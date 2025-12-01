@@ -4,7 +4,7 @@ const color = textureLoader.load(
   "textures/grass/Poliigon_GrassPatchyGround_4585_BaseColor.jpg",
 );
 const metalNess = textureLoader.load(
-  "public/textures/grass/Poliigon_GrassPatchyGround_4585_Metallic.jpg",
+  "textures/grass/Poliigon_GrassPatchyGround_4585_Metallic.jpg",
 );
 const height = textureLoader.load(
   "textures/grass/Poliigon_GrassPatchyGround_4585_Displacement.png",
