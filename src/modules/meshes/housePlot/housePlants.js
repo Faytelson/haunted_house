@@ -114,7 +114,7 @@ instancedGrassArray.forEach((instancedMesh) => {
   grassGroup.add(instancedMesh);
 });
 grassGroup.position.x = -3;
-grassGroup.position.z = 7;
+grassGroup.position.z = 6.5;
 
 // kalmia latifolia bushes
 const kalmiaBushScene = await loadScene("models/kalmia_latifolia_galaxy/scene.gltf");

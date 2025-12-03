@@ -1,11 +1,16 @@
 import { textureLoader } from "../loaders";
 
-const color = textureLoader.load("textures/house_road/Stylized_Stone_Floor_005_basecolor.jpg");
-const ambientOcclusion = textureLoader.load(
-  "textures/house_road/Stylized_Stone_Floor_005_ambientOcclusion.jpg",
+const color = textureLoader.load(
+  "textures/StoneBricksSplitface001/StoneBricksSplitface001_COL_1K.jpg",
 );
-const height = textureLoader.load("textures/house_road/Stylized_Stone_Floor_005_height.png");
-const normal = textureLoader.load("textures/house_road/Stylized_Stone_Floor_005_normal.jpg");
-const roughness = textureLoader.load("textures/house_road/Stylized_Stone_Floor_005_roughness.jpg");
+const ambientOcclusion = textureLoader.load(
+  "textures/StoneBricksSplitface001/StoneBricksSplitface001_AO_1K.jpg",
+);
+const height = textureLoader.load(
+  "textures/StoneBricksSplitface001/StoneBricksSplitface001_DISP_1K.png",
+);
+const normal = textureLoader.load(
+  "/textures/StoneBricksSplitface001/StoneBricksSplitface001_NRM_1K.png",
+);
 
-export { color, ambientOcclusion, height, normal, roughness };
+export { color, ambientOcclusion, height, normal };

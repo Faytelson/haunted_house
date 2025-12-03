@@ -43,7 +43,6 @@ const houseRoadMaterial = new THREE.MeshStandardMaterial({
   aoMapIntensity: 2,
   displacementMap: houseRoadTexture.height,
   displacementScale: 0.06,
-  roughnessMap: houseRoadTexture.roughness,
 });
 for (const key in houseRoadTexture) {
   houseRoadTexture[key].repeat.x = 1;
@@ -54,7 +53,7 @@ for (const key in houseRoadTexture) {
 houseRoadTexture.color.colorSpace = THREE.SRGBColorSpace;
 const houseRoad = new THREE.Mesh(houseRoadGeometry, houseRoadMaterial);
 houseRoad.position.y = -(fenceWidth / 2 - houseRoadLength / 2) + 0.1;
-houseRoad.position.z = 0.2;
+houseRoad.position.z = 0.1;
 houseGround.add(houseRoad);
 
 houseGround.traverse((child) => {

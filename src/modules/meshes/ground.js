@@ -7,8 +7,8 @@ const grassMainMaterial = new THREE.MeshStandardMaterial({
   roughnessMap: grassMainTexture.roughness,
 });
 for (const key in grassMainTexture) {
-  grassMainTexture[key].repeat.x = 20;
-  grassMainTexture[key].repeat.y = 20;
+  grassMainTexture[key].repeat.x = 40;
+  grassMainTexture[key].repeat.y = 40;
   grassMainTexture[key].wrapS = THREE.RepeatWrapping;
   grassMainTexture[key].wrapT = THREE.RepeatWrapping;
 }
