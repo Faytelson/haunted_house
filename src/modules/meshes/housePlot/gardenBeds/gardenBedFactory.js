@@ -5,7 +5,7 @@ const gardenBedMaterial = new THREE.MeshStandardMaterial({
   map: groundTexture.color,
   normalMap: groundTexture.normal,
   displacementMap: groundTexture.height,
-  displacementScale: 0.6,
+  displacementScale: 0.3,
 });
 
 const createGardenBed = ({ width, length, segmentsX, segmentsY, x = 0, y = 0, z = 0 }) => {

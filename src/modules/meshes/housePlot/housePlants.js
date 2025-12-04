@@ -10,30 +10,35 @@ const treeGroup = new THREE.Group();
 const tree1 = cloneScene(treeScene);
 tree1.position.x = 0;
 tree1.position.z = 0;
-tree1.scale.set(0.29, 0.29, 0.29);
+tree1.scale.set(0.39, 0.39, 0.39);
 tree1.rotation.y = Math.PI / 4;
 treeGroup.add(tree1);
 
 const tree2 = cloneScene(treeScene);
 tree2.position.x = 3;
 tree2.position.z = 2;
-tree2.scale.set(0.18, 0.18, 0.18);
+tree2.scale.set(0.28, 0.28, 0.28);
 treeGroup.add(tree2);
 
 const tree3 = cloneScene(treeScene);
 tree3.position.x = 1;
 tree3.position.z = 3;
-tree3.scale.set(0.22, 0.22, 0.22);
+tree3.scale.set(0.32, 0.32, 0.32);
 treeGroup.add(tree3);
 
 const tree4 = cloneScene(treeScene);
 tree4.position.x = 2;
 tree4.position.z = 17;
-tree4.scale.set(0.22, 0.22, 0.22);
+tree4.scale.set(0.32, 0.32, 0.32);
 treeGroup.add(tree4);
 
 treeGroup.position.x = -fenceWidth / 2 + 1;
 treeGroup.position.z = -15;
+treeGroup.traverse(child => {
+  if (child.isMesh) {
+    child.castShadow = true;
+  }
+})
 
 // bushes
 const bushScene = await loadScene("models/green_bush/scene.gltf");

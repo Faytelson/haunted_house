@@ -12,8 +12,8 @@ const offsetZ = 1;
 const options = {
   width: gardenBedMDWidth,
   length: gardenBedMDLength,
-  segmentsX: 100,
-  segmentsY: 100,
+  segmentsX: 200,
+  segmentsY: 200,
   x: gardenBedMDWidth /2 - fenceWidth / 2 + offsetX,
   z: -(gardenBedMDLength /2 - fenceWidth / 2 + offsetZ),
 };
