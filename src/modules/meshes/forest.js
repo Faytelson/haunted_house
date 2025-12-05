@@ -9,6 +9,7 @@ const forestTreesMeshes = getMeshesFromScene(forestTreesScene);
 const filteredForestTreesMeshes = forestTreesMeshes.filter(
   (mesh) => mesh.name !== "SM_FreeTree_07_Free_Tree_M_0" && mesh.name !== "SM_FreeTree_04_Free_Tree_M_0",
 );
+
 const instancedForestTreesArray = createInstancedMeshes(
   {
     countInRow: 19,
@@ -25,9 +26,9 @@ const forestTreesGroup = new THREE.Group();
 instancedForestTreesArray.forEach((instancedMesh) => {
   forestTreesGroup.add(instancedMesh);
 });
-
 forestTreesGroup.position.x = -40;
-forestTreesGroup.position.z = -170;
+forestTreesGroup.position.z = -162;
+
 forestTreesGroup.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
@@ -35,5 +36,43 @@ forestTreesGroup.traverse((child) => {
   }
 });
 forest.add(forestTreesGroup);
+
+// side trees
+const instancedForestTreesSideArray = createInstancedMeshes(
+  {
+    countInRow: 2,
+    countInColumn: 7,
+    stepInRow: 6,
+    stepInColumn: 7,
+    rangeInRow: 2,
+    rangeInColumn: 5,
+    scale: 0.015,
+  },
+  filteredForestTreesMeshes,
+);
+const forestTreesLeftGroup = new THREE.Group();
+instancedForestTreesSideArray.forEach((instancedMesh) => {
+  forestTreesLeftGroup.add(instancedMesh);
+});
+forestTreesLeftGroup.position.x = -37;
+forestTreesLeftGroup.position.z = 15;
+forestTreesLeftGroup.rotation.y = Math.PI;
+forestTreesLeftGroup.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+  }
+});
+
+const forestTreesRightGroup = forestTreesLeftGroup.clone()
+forestTreesRightGroup.position.x = 24;
+forestTreesRightGroup.position.z = 0;
+forestTreesRightGroup.rotation.y = Math.PI / 2;
+forestTreesRightGroup.traverse((child) => {
+  if (child.isMesh) {
+    child.castShadow = true;
+  }
+});
+
+forest.add(forestTreesGroup, forestTreesLeftGroup, forestTreesRightGroup);
 
 export { forest };
