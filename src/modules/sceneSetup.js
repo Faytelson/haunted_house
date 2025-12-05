@@ -16,8 +16,13 @@ const scene = new THREE.Scene();
 scene.add(sky);
 
 // camera
+export const cameraTarget = {
+  x: 0.34,
+  y: 7,
+  z: -2,
+};
 export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 3000);
-camera.position.set(0, 10, 30); //remove
+camera.position.set(-3.35, 15, 37); //remove
 // camera.position.set(0, 20, 50);
 scene.add(camera);
 
@@ -122,6 +127,7 @@ const loop = () => {
   const elapsedTime = clock.getElapsedTime();
   // fullScene.rotation.y = (elapsedTime * Math.PI) / 12;
 
+  controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
   controls.update();
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop);
