@@ -4,6 +4,6 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const gltfLoader = new GLTFLoader();
-const cubeTextureLoader = new THREE.CubeTextureLoader();
+const cubeTextureLoader = new THREE.CubeTextureLoader().setPath("cubeMaps/");
 
 export { loadingManager, textureLoader, gltfLoader, cubeTextureLoader };

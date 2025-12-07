@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { fullScene } from "./meshes/fullScene";
-import { sky } from "./sky";
 import { gsap } from "gsap/gsap-core";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
+import { cubeTextureLoader } from "./loaders";
 
 // common settings
 const sizes = {
@@ -13,7 +13,15 @@ const canvas = document.querySelector(".app__webgl");
 
 // scene
 const scene = new THREE.Scene();
-scene.add(sky);
+const sky = await cubeTextureLoader.loadAsync([
+  "px.png",
+  "nx.png",
+  "py.png",
+  "ny.png",
+  "pz.png",
+  "nz.png",
+]);
+scene.background = sky;
 
 // camera
 export const cameraTarget = {
@@ -22,7 +30,7 @@ export const cameraTarget = {
   z: -2,
 };
 export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 3000);
-camera.position.set(-3.35, 15, 37); //remove
+camera.position.set(-3.35, 14, 37); //remove
 // camera.position.set(0, 20, 50);
 scene.add(camera);
 
@@ -34,11 +42,11 @@ scene.add(camera);
 // });
 
 // lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffe2b8, 0.25);
 scene.add(ambientLight);
 
-const sunLight = new THREE.DirectionalLight(0xfff8dc, 4);
-sunLight.position.set(10, 30, 10);
+const sunLight = new THREE.DirectionalLight(0xffe2b8, 2.8);
+sunLight.position.set(20, 20, 20);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048, 2048);
 sunLight.shadow.camera.near = 0.5;
