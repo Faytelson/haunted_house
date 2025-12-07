@@ -42,11 +42,11 @@ scene.add(camera);
 // });
 
 // lights
-const ambientLight = new THREE.AmbientLight(0xffe2b8, 0.25);
+const ambientLight = new THREE.AmbientLight(0xfff4e5, 0.25);
 scene.add(ambientLight);
 
-const sunLight = new THREE.DirectionalLight(0xffe2b8, 2.8);
-sunLight.position.set(20, 20, 20);
+const sunLight = new THREE.DirectionalLight(0xffc27a, 2.8);
+sunLight.position.set(20, 20, 30);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048, 2048);
 sunLight.shadow.camera.near = 0.5;
