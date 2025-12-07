@@ -2,43 +2,47 @@ import * as THREE from "three";
 import { fenceWidth } from "./fence.js";
 import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../../createInstancedMesh.js";
 import { cloneScene } from "../../../utils/index.js";
+import { forestTreesMeshes } from "../forest.js";
 
 // tree
-const treeScene = await loadScene("models/tree/scene.gltf");
 const treeGroup = new THREE.Group();
 
-const tree1 = cloneScene(treeScene);
-tree1.position.x = 0;
-tree1.position.z = 0;
-tree1.scale.set(0.39, 0.39, 0.39);
-tree1.rotation.y = Math.PI / 4;
-treeGroup.add(tree1);
+forestTreesMeshes.forEach((mesh) => {
+  if (mesh.name === "SM_FreeTree_02_Free_Tree_M_0") {
+    mesh.position.x = 10;
+    mesh.position.z = 6;
+    mesh.scale.set(0.01, 0.01, 0.01);
+    treeGroup.add(mesh);
+  }
 
-const tree2 = cloneScene(treeScene);
-tree2.position.x = 3;
-tree2.position.z = 2;
-tree2.scale.set(0.28, 0.28, 0.28);
-treeGroup.add(tree2);
+  if (mesh.name === "SM_FreeTree_05_Free_Tree_M_0") {
+    mesh.position.x = 3;
+    mesh.scale.set(0.015, 0.015, 0.015);
+    treeGroup.add(mesh);
+  }
 
-const tree3 = cloneScene(treeScene);
-tree3.position.x = 1;
-tree3.position.z = 3;
-tree3.scale.set(0.32, 0.32, 0.32);
-treeGroup.add(tree3);
+  if (mesh.name === "SM_FreeTree_06_Free_Tree_M_0") {
+    mesh.position.x = -4;
+    mesh.position.z = 17;
+    mesh.scale.set(0.012, 0.012, 0.012);
+    treeGroup.add(mesh);
+  }
 
-const tree4 = cloneScene(treeScene);
-tree4.position.x = 2;
-tree4.position.z = 17;
-tree4.scale.set(0.32, 0.32, 0.32);
-treeGroup.add(tree4);
+  if (mesh.name === "SM_FreeTree_07_Free_Tree_M_0") {
+    mesh.position.x = -1;
+    mesh.position.z = 3;
+    mesh.scale.set(0.01, 0.01, 0.01);
+    treeGroup.add(mesh);
+  }
+});
 
 treeGroup.position.x = -fenceWidth / 2 + 1;
 treeGroup.position.z = -15;
-treeGroup.traverse(child => {
+treeGroup.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
   }
-})
+});
 
 // bushes
 const bushScene = await loadScene("models/green_bush/scene.gltf");
@@ -100,7 +104,7 @@ instancedBerryPlantArray.forEach((instancedMesh) => {
 berryPlantGroup.position.x = -fenceWidth / 2 + 1.8;
 berryPlantGroup.position.z = -fenceWidth / 2 + 3.5;
 
-// grass in the frontyard
+// grass in the front yard
 const instancedGrassArray = createInstancedMeshes(
   {
     countInRow: 2,
@@ -143,10 +147,4 @@ instancedKalmiaBushArray.forEach((instancedMesh) => {
 kalmiaBushGroup.position.x = -1.6;
 kalmiaBushGroup.position.z = 8;
 
-export {
-  treeGroup,
-  bushGroup,
-  berryPlantGroup,
-  grassGroup,
-  kalmiaBushGroup,
-};
+export { treeGroup, bushGroup, berryPlantGroup, grassGroup, kalmiaBushGroup };

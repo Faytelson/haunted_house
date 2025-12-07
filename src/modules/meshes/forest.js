@@ -75,4 +75,4 @@ forestTreesRightGroup.traverse((child) => {
 
 forest.add(forestTreesGroup, forestTreesLeftGroup, forestTreesRightGroup);
 
-export { forest };
+export { forest, forestTreesMeshes };
