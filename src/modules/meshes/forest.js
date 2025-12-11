@@ -12,7 +12,7 @@ const filteredForestTreesMeshes = forestTreesMeshes.filter(
 
 const instancedForestTreesArray = createInstancedMeshes(
   {
-    countInRow: 19,
+    countInRow: 15,
     countInColumn: 10,
     stepInRow: 10,
     stepInColumn: 15,

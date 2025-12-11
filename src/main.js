@@ -1,3 +1,3 @@
 import "./styles/styles.scss";
-import "./modules/sceneSetup";
+import "./modules/scene";
 import "./modules/debugUI";

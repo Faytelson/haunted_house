@@ -1,15 +1,15 @@
 import * as THREE from "three";
+import { gsap } from "gsap";
 import { fullScene } from "./meshes/fullScene";
-import { gsap } from "gsap/gsap-core";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { cubeTextureLoader } from "./loaders";
+// import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 // common settings
+const canvas = document.querySelector(".app__webgl");
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
-const canvas = document.querySelector(".app__webgl");
 
 // scene
 const scene = new THREE.Scene();
@@ -22,24 +22,7 @@ const sky = await cubeTextureLoader.loadAsync([
   "nz.png",
 ]);
 scene.background = sky;
-
-// camera
-export const cameraTarget = {
-  x: 0.34,
-  y: 7,
-  z: -2,
-};
-export const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 3000);
-camera.position.set(-3.35, 14, 37); //remove
-// camera.position.set(0, 20, 50);
-scene.add(camera);
-
-// gsap.to(camera.position, {
-//   duration: 8,
-//   z: 30,
-//   y: 10,
-//   ease: "back.inOut(4)",
-// });
+scene.add(fullScene);
 
 // lights
 const ambientLight = new THREE.AmbientLight(0xfff4e5, 0.25);
@@ -58,27 +41,43 @@ sunLight.shadow.camera.bottom = -50;
 sunLight.shadow.bias = -0.0001;
 scene.add(sunLight);
 
-// meshes
-scene.add(fullScene);
-
-// helpers
+// helpers & controls
 const axesHelper = new THREE.AxesHelper(10);
 scene.add(axesHelper);
 
 const lightHelper = new THREE.DirectionalLightHelper(sunLight, 5);
 scene.add(lightHelper);
 
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
+// const controls = new OrbitControls(camera, canvas);
+// controls.enableDamping = true;
+
+// camera
+const cameraStart = new THREE.Vector3(-10, 17, 39);
+const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 3000);
+camera.position.set(cameraStart.x, cameraStart.y, cameraStart.z);
+scene.add(camera);
+
+const cameraTarget = {
+  x: 0.34,
+  y: 7,
+  z: -2,
+};
+
+// camera animation
+gsap.to(camera.position, {
+  duration: 12,
+  x: 0,
+  y: 14,
+  z: 34,
+  ease: "power2.out",
+});
 
 // resize
 function onWindowResize() {
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
-  // camera update
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();
-  // renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
@@ -129,15 +128,13 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.render(scene, camera);
 
 // animation
-const clock = new THREE.Clock();
 const loop = () => {
-  // анимация вращения всех объектов
-  const elapsedTime = clock.getElapsedTime();
-  // fullScene.rotation.y = (elapsedTime * Math.PI) / 12;
-
-  controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
-  controls.update();
+  // controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
+  // controls.update();
+  camera.lookAt(cameraTarget.x, cameraTarget.y, cameraTarget.z);
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop);
 };
 loop();
+
+export { camera, cameraTarget };

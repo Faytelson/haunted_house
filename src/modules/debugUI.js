@@ -1,5 +1,5 @@
 import GUI from "lil-gui";
-import { camera, cameraTarget } from "./sceneSetup";
+import { camera, cameraTarget } from "./scene";
 
 const gui = new GUI();
 gui.add(camera.position, "x").min(-50).max(50).step(0.0001).name("Camera position X");
