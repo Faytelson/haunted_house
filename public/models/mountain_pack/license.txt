@@ -1,8 +1,0 @@
-Model Information:
-* title:	white_mesh (10)
-* source:	https://sketchfab.com/3d-models/white-mesh-10-a93d85b555fa4c8ea2027674b784a5e8
-* author:	sevengames (https://sketchfab.com/sevengames)
-
-Model License:
-* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
-* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

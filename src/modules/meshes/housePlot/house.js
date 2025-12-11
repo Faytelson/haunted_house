@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import { getOffsetByAngle } from "../../../utils";
-import * as houseWallsTexture from "../../textures/houseWallsTextures";
-import * as roofTexture from "../../textures/roofTextures";
-import * as doorTexture from "../../textures/doorTextures";
+import { houseWallsTexture } from "../../textures/houseWallsTexture";
+import { roofTexture } from "../../textures/roofTexture";
+import { doorTexture } from "../../textures/doorTexture";
+import { loadScene } from "../../createInstancedMesh";
 
 const house = new THREE.Group();
 const houseWidth = 7;
@@ -20,14 +21,6 @@ const wallsMaterial = new THREE.MeshStandardMaterial({
   displacementScale: 0.002,
   side: THREE.DoubleSide,
 });
-
-for (const key in houseWallsTexture) {
-  houseWallsTexture[key].repeat.x = 2.5;
-  houseWallsTexture[key].wrapS = THREE.RepeatWrapping;
-  houseWallsTexture[key].wrapT = THREE.ClampToEdgeWrapping;
-  houseWallsTexture[key].offset.x = 0.32;
-}
-houseWallsTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 const walls = new THREE.Mesh(
   new THREE.BoxGeometry(houseWidth, firstFloorHeight, houseLength, 50, 50, 50),
@@ -129,7 +122,6 @@ const leftSlope = new THREE.Mesh(
   new THREE.BoxGeometry(houseLength + 0.8, slopeHeightWithOffset, 0.05, 200, 200),
   roofMaterial,
 );
-roofTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 leftSlope.geometry.rotateY(Math.PI / 2);
 leftSlope.rotation.z = -(Math.PI / 2 - slopeAngle);
@@ -150,13 +142,6 @@ secondFloor.traverse((child) => {
     child.receiveShadow = false;
   }
 });
-
-for (const key in roofTexture) {
-  roofTexture[key].repeat.x = 4;
-  roofTexture[key].repeat.y = 2;
-  roofTexture[key].wrapS = THREE.RepeatWrapping;
-  roofTexture[key].wrapT = THREE.RepeatWrapping;
-}
 
 // DOOR
 // Изначальная ширина двери 1.4, умноженная на коэффициент

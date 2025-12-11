@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 import { fullScene } from "./meshes/fullScene";
 import { cubeTextureLoader } from "./loaders";
-// import { OrbitControls } from "three/examples/jsm/Addons.js";
 
 // common settings
 const canvas = document.querySelector(".app__webgl");
@@ -31,7 +30,7 @@ scene.add(ambientLight);
 const sunLight = new THREE.DirectionalLight(0xffc27a, 2.8);
 sunLight.position.set(20, 20, 30);
 sunLight.castShadow = true;
-sunLight.shadow.mapSize.set(2048, 2048);
+sunLight.shadow.mapSize.set(1024, 1024);
 sunLight.shadow.camera.near = 0.5;
 sunLight.shadow.camera.far = 70;
 sunLight.shadow.camera.left = -50;
@@ -40,16 +39,6 @@ sunLight.shadow.camera.top = 50;
 sunLight.shadow.camera.bottom = -50;
 sunLight.shadow.bias = -0.0001;
 scene.add(sunLight);
-
-// helpers & controls
-const axesHelper = new THREE.AxesHelper(10);
-scene.add(axesHelper);
-
-const lightHelper = new THREE.DirectionalLightHelper(sunLight, 5);
-scene.add(lightHelper);
-
-// const controls = new OrbitControls(camera, canvas);
-// controls.enableDamping = true;
 
 // camera
 const cameraStart = new THREE.Vector3(-10, 17, 39);
@@ -62,15 +51,7 @@ const cameraTarget = {
   y: 7,
   z: -2,
 };
-
-// camera animation
-gsap.to(camera.position, {
-  duration: 12,
-  x: 0,
-  y: 14,
-  z: 34,
-  ease: "power2.out",
-});
+camera.lookAt(cameraTarget.x, cameraTarget.y, cameraTarget.z);
 
 // resize
 function onWindowResize() {
@@ -96,11 +77,11 @@ canvas.addEventListener("dblclick", () => {
     if (canvas.requestFullscreen) {
       canvas.requestFullscreen();
     } else if (canvas.webkitRequestFullscreen) {
-      canvas.webkitRequestFullscreen(); // Safari
+      canvas.webkitRequestFullscreen();
     } else if (canvas.mozRequestFullScreen) {
-      canvas.mozRequestFullScreen(); // Firefox старый
+      canvas.mozRequestFullScreen();
     } else if (canvas.msRequestFullscreen) {
-      canvas.msRequestFullscreen(); // IE/Edge старый
+      canvas.msRequestFullscreen();
     }
   } else {
     if (doc.exitFullscreen) {
@@ -127,10 +108,17 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.render(scene, camera);
 
-// animation
+// анимация камеры
+gsap.to(camera.position, {
+  duration: 7,
+  x: -2,
+  y: 10,
+  z: 34,
+  ease: "power1.inOut",
+});
+
+// loop
 const loop = () => {
-  // controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
-  // controls.update();
   camera.lookAt(cameraTarget.x, cameraTarget.y, cameraTarget.z);
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop);

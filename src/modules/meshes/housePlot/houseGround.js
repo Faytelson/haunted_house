@@ -1,13 +1,13 @@
 import * as THREE from "three";
-import * as grassTexture from "../../textures/grassTextures";
-import * as houseRoadTexture from "../../textures/houseRoadTextures";
+import { grassTexture } from "../../textures/grassTexture";
+import { houseRoadTexture } from "../../textures/houseRoadTexture";
 import { fenceWidth, gatesWidth } from "./fence";
-import { gardenBedLGLength } from "./gardenBeds/gardenBedFactory";
+import { gardenBedPlantsLength } from "./gardenBeds/gardenBedPlants";
 
 // grass
 const houseGround = new THREE.Group();
 houseGround.rotation.x = -Math.PI / 2;
-const grassGeometryBackLength = fenceWidth - gardenBedLGLength;
+const grassGeometryBackLength = fenceWidth - gardenBedPlantsLength;
 
 const grassGeometryBack = new THREE.PlaneGeometry(
   fenceWidth - 0.2,
@@ -32,13 +32,7 @@ const grassMaterial = new THREE.MeshStandardMaterial({
   displacementMap: grassTexture.height,
   displacementScale: 0.1,
 });
-for (const key in grassTexture) {
-  grassTexture[key].repeat.x = 10;
-  grassTexture[key].repeat.y = 3;
-  grassTexture[key].wrapS = THREE.RepeatWrapping;
-  grassTexture[key].wrapT = THREE.RepeatWrapping;
-}
-grassTexture.color.colorSpace = THREE.SRGBColorSpace;
+
 const grassBackYard = new THREE.Mesh(grassGeometryBack, grassMaterial);
 grassBackYard.position.y = -grassGeometryBackLength / 2 + fenceWidth / 2 + 0.1;
 grassBackYard.position.z = 0.001;
@@ -56,13 +50,6 @@ const houseRoadMaterial = new THREE.MeshStandardMaterial({
   displacementMap: houseRoadTexture.height,
   displacementScale: 0.06,
 });
-for (const key in houseRoadTexture) {
-  houseRoadTexture[key].repeat.x = 1;
-  houseRoadTexture[key].repeat.y = 20;
-  houseRoadTexture[key].wrapS = THREE.RepeatWrapping;
-  houseRoadTexture[key].wrapT = THREE.RepeatWrapping;
-}
-houseRoadTexture.color.colorSpace = THREE.SRGBColorSpace;
 const houseRoad = new THREE.Mesh(houseRoadGeometry, houseRoadMaterial);
 houseRoad.position.y = -(fenceWidth / 2 - houseRoadLength / 2) + 0.1;
 houseRoad.position.z = 0.001;

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import * as fenceTexture from "../../textures/fenceTextures";
+import { fenceTexture } from "../../textures/fenceTexture";
 
 export const fenceWidth = 35;
 const fenceHeight = 2;
@@ -21,7 +21,6 @@ const fenceMaterial = new THREE.MeshStandardMaterial({
 });
 
 // left front
-const wrapX = 20;
 const fenceHalfGeometry = new THREE.BoxGeometry(
   fenceWidth / 2 - gatesWidth / 2,
   fenceHeight,
@@ -30,12 +29,6 @@ const fenceHalfGeometry = new THREE.BoxGeometry(
   50,
   50,
 );
-for (const key in fenceTexture) {
-  fenceTexture[key].repeat.x = wrapX;
-  fenceTexture[key].wrapS = THREE.RepeatWrapping;
-  fenceTexture[key].wrapT = THREE.ClampToEdgeWrapping;
-}
-fenceTexture.color.colorSpace = THREE.SRGBColorSpace;
 
 const fenceFrontLeft = new THREE.Mesh(fenceHalfGeometry, fenceMaterial);
 fenceFrontLeft.position.set(

@@ -7,7 +7,8 @@ const forest = new THREE.Group();
 const forestTreesScene = await loadScene("models/forest_trees/scene.gltf");
 const forestTreesMeshes = getMeshesFromScene(forestTreesScene);
 const filteredForestTreesMeshes = forestTreesMeshes.filter(
-  (mesh) => mesh.name !== "SM_FreeTree_07_Free_Tree_M_0" && mesh.name !== "SM_FreeTree_04_Free_Tree_M_0",
+  (mesh) =>
+    mesh.name !== "SM_FreeTree_07_Free_Tree_M_0" && mesh.name !== "SM_FreeTree_04_Free_Tree_M_0",
 );
 
 const instancedForestTreesArray = createInstancedMeshes(
@@ -28,13 +29,6 @@ instancedForestTreesArray.forEach((instancedMesh) => {
 });
 forestTreesGroup.position.x = -40;
 forestTreesGroup.position.z = -162;
-
-forestTreesGroup.traverse((child) => {
-  if (child.isMesh) {
-    child.castShadow = true;
-    child.scale.y = Math.random() * 0.5 + 0.8;
-  }
-});
 forest.add(forestTreesGroup);
 
 // side trees
@@ -63,16 +57,11 @@ forestTreesLeftGroup.traverse((child) => {
   }
 });
 
-const forestTreesRightGroup = forestTreesLeftGroup.clone()
+const forestTreesRightGroup = forestTreesLeftGroup.clone();
 forestTreesRightGroup.position.x = 24;
 forestTreesRightGroup.position.z = 0;
 forestTreesRightGroup.rotation.y = Math.PI / 2;
-forestTreesRightGroup.traverse((child) => {
-  if (child.isMesh) {
-    child.castShadow = true;
-  }
-});
 
-forest.add(forestTreesGroup, forestTreesLeftGroup, forestTreesRightGroup);
+forest.add(forestTreesLeftGroup, forestTreesRightGroup);
 
 export { forest, forestTreesMeshes };

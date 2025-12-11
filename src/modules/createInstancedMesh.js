@@ -40,11 +40,7 @@ const createInstancedMeshes = (options, meshes) => {
       const offsetX = (Math.random() - 0.5) * rangeInRow;
       const offsetZ = (Math.random() - 0.5) * rangeInColumn;
 
-      positions.push({
-        x: x * stepInRow + offsetX,
-        y: 0,
-        z: z * stepInColumn + offsetZ,
-      });
+      positions.push(new THREE.Vector3(x * stepInRow + offsetX, 0, z * stepInColumn + offsetZ));
     }
   }
 
@@ -54,7 +50,7 @@ const createInstancedMeshes = (options, meshes) => {
     if (rotation && rotation.isEuler) dummy.rotation.copy(rotation);
 
     positions.forEach((pos, i) => {
-      dummy.position.set(pos.x, pos.y, pos.z);
+      dummy.position.copy(pos);
       dummy.updateMatrix();
       instancedMesh.setMatrixAt(i, dummy.matrix);
     });

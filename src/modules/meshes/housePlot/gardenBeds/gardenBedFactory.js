@@ -18,17 +18,7 @@ const createGardenBed = ({ width, length, segmentsX, segmentsY, x = 0, y = 0, z 
   return bed;
 };
 
-const gardenBedLGWidth = 13;
-const gardenBedLGLength = 22;
-
-const gardenBedMDWidth = 13;
-const gardenBedMDLength = 6;
-
 export {
   gardenBedMaterial,
   createGardenBed,
-  gardenBedLGWidth,
-  gardenBedLGLength,
-  gardenBedMDWidth,
-  gardenBedMDLength,
 };

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { baseGround } from "./ground";
+import { baseGround } from "./baseGround";
 import { housePlot } from "./housePlot/housePlot";
 import { forest } from "./forest";
 
