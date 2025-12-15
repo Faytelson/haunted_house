@@ -3,7 +3,7 @@ import { getOffsetByAngle } from "../../../utils";
 import { houseWallsTexture } from "../../textures/houseWallsTexture";
 import { roofTexture } from "../../textures/roofTexture";
 import { doorTexture } from "../../textures/doorTexture";
-import { loadScene } from "../../createInstancedMesh";
+import { tooltipAnchorHouse } from "../tooltips";
 
 const house = new THREE.Group();
 const houseWidth = 7;
@@ -236,11 +236,17 @@ const pillarRight = pillarLeft.clone();
 pillarRight.position.x = -(thresholdWidth / 2 - pillarRadius);
 porch.add(pillarRight);
 
+// tooltip
+house.add(tooltipAnchorHouse);
+tooltipAnchorHouse.position.set(0, firstFloorHeight + secondFloorHeight + 1, houseLength / 2);
+
 house.traverse((child) => {
   if (child.isMesh) {
     child.castShadow = true;
     child.receiveShadow = false;
   }
 });
+
+house.userData.groupID = "house";
 
 export { house, wallsMaterial, doorWidth, doorHeight, doorMaterial, roofMaterial };

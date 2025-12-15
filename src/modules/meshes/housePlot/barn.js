@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { wallsMaterial } from "./house";
 import { fenceWidth } from "./fence";
 import { doorWidth, doorHeight, doorMaterial, roofMaterial } from "./house";
+import { tooltipAnchorBarn } from "../tooltips";
 
 const barn = new THREE.Group();
 const barnWidth = 4;
@@ -37,7 +38,12 @@ barn.traverse((child) => {
   }
 });
 
+// tooltip
+barn.add(tooltipAnchorBarn);
+tooltipAnchorBarn.position.set(6, barnHeight + 1, barnLength / 2);
+
 barn.position.x = fenceWidth / 2 - barnWidth / 2 - 2;
 barn.position.z = -(fenceWidth / 2 - barnWidth / 2) + 2;
+barn.userData.groupID = "barn";
 
 export { barn };

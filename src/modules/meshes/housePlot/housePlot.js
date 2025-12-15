@@ -18,4 +18,6 @@ housePlot.add(gardenBedRealisticGrass);
 housePlot.add(treeGroup, berryPlantGroup, grassGroup);
 housePlot.add(houseGround);
 
+housePlot.userData.groupID = "housePlot";
+
 export { housePlot };

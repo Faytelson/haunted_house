@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { fenceWidth } from "./fence.js";
 import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../../createInstancedMesh.js";
 import { forestTreesMeshes } from "../forest.js";
+import { tooltipAnchorTree } from "../tooltips.js";
 
 // tree
 const treeGroup = new THREE.Group();
@@ -42,6 +43,11 @@ treeGroup.traverse((child) => {
     child.castShadow = true;
   }
 });
+// tooltip
+treeGroup.add(tooltipAnchorTree);
+tooltipAnchorTree.position.set(-15, 12, 0);
+
+treeGroup.userData.groupID = "trees";
 
 // grass in the backyard
 const berryPlantScene = await loadScene("models/stylized_berry_plant/scene.gltf");
