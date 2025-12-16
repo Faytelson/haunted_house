@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const groundTexture = {
   color: textureLoader.load("textures/ground/GroundDirtWeedsPatchy004_COL_2K.jpg"),

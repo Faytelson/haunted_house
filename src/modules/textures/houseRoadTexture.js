@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const houseRoadTexture = {
   color: textureLoader.load("textures/house_road/StoneBricksSplitface001_COL_1K.jpg"),

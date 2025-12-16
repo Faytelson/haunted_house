@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const doorTexture = {
   color: textureLoader.load("textures/door/Door_Wood_001_basecolor.jpg"),

@@ -1,18 +1,4 @@
 import * as THREE from "three";
-import { gltfLoader } from "./loaders";
-
-const loadScene = async (url) => {
-  const gltf = await gltfLoader.loadAsync(url);
-  return gltf.scene;
-};
-
-const getMeshesFromScene = (scene) => {
-  const meshes = [];
-  scene.traverse((child) => {
-    if (child.isMesh) meshes.push(child);
-  });
-  return meshes;
-};
 
 const createInstancedMeshes = (options, meshes) => {
   const {
@@ -63,4 +49,4 @@ const createInstancedMeshes = (options, meshes) => {
   return instancedMeshes;
 };
 
-export { loadScene, getMeshesFromScene, createInstancedMeshes };
+export { createInstancedMeshes };

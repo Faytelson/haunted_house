@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { getOffsetByAngle } from "../../../utils";
+import { getOffsetByAngle } from "../../actions";
 import { houseWallsTexture } from "../../textures/houseWallsTexture";
 import { roofTexture } from "../../textures/roofTexture";
 import { doorTexture } from "../../textures/doorTexture";

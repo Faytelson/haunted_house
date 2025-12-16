@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const roofTexture = {
   color: textureLoader.load("textures/roof/Wood_Roof_Tiles_001_COLOR.jpg"),

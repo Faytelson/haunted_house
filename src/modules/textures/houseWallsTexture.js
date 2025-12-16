@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const houseWallsTexture = {
   color: textureLoader.load("textures/walls/Wood_plank_COLOR.jpg"),

@@ -1,4 +1,4 @@
-import { traverseAndCollectMeshes } from "../utils";
+import { traverseAndCollectMeshes } from "./utils";
 import { fullScene } from "./meshes/fullScene";
 
 let houseGroup;

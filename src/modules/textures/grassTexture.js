@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const grassTexture = {
   color: textureLoader.load("textures/grass/Poliigon_GrassPatchyGround_4585_BaseColor.jpg"),

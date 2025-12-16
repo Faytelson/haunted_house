@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { textureLoader } from "../loaders";
+import { textureLoader } from "../setup/loaders";
 
 const fenceTexture = {
   color: textureLoader.load("textures/fence/Wood_Fence_001_basecolor.jpg"),
