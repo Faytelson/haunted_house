@@ -1,6 +1,6 @@
 export default [
   {
-    name: "envMapTexture",
+    name: "envMap",
     category: "environment",
     type: "cubeTexture",
     path: [

@@ -1,10 +1,13 @@
 import * as THREE from "three";
 
 class Environment {
-  constructor(app, { ambientLightOptions, sunLightOptions }) {
+  constructor(app, { ambientLightOptions, sunLightOptions, envMapOptions }) {
     this.scene = app.scene;
     this.ambientLightOptions = ambientLightOptions;
     this.sunLightOptions = sunLightOptions;
+    this.envMapOptions = envMapOptions;
+    this.assetLoader = app.assetLoader;
+    this.setEnvironmentMap();
     this.setAmbientLight();
     this.setSunLight();
   }
@@ -32,6 +35,28 @@ class Environment {
     Object.assign(this.sunLight.shadow.camera, camera);
     this.sunLight.shadow.bias = bias;
     this.scene.add(this.sunLight);
+  }
+
+  setEnvironmentMap() {
+    const envMap = this.assetLoader.assets.environment.envMap;
+    envMap.encoding = THREE.sRGBEncoding;
+    this.scene.environment = envMap;
+    this.scene.background = envMap;
+  }
+
+  updateMaterials() {
+    const { intensity } = this.envMapOptions;
+
+    this.scene.traverse((child) => {
+      if (
+        child.isMesh &&
+        child instanceof THREE.Mesh &&
+        child.material instanceof THREE.MeshStandardMaterial
+      ) {
+        child.material.envMapIntensity = intensity;
+        child.material.needsUpdate = true;
+      }
+    });
   }
 }
 

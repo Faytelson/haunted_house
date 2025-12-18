@@ -18,6 +18,7 @@ class AssetLoader {
 
     this.loadingManager.onLoad = () => {
       this.emitter.emit("assetsLoaded");
+      console.log(this.assets);
     };
 
     this.loadingManager.onError = (url) => {
@@ -38,13 +39,18 @@ class AssetLoader {
   }
 
   loadAsset(asset) {
-    const { type, category, name, path } = asset;
+    const { type, category, name, path, textureMapType } = asset;
 
     const store = (file) => {
       if (!this.assets[category]) {
         this.assets[category] = {};
       }
-      this.assets[category][name] = file;
+      if (!textureMapType) {
+        this.assets[category][name] = file;
+      } else {
+        if (!this.assets[category][name]) this.assets[category][name] = {};
+        this.assets[category][name][textureMapType] = file;
+      }
     };
 
     switch (type) {

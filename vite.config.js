@@ -7,6 +7,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
       "@fonts": path.resolve(__dirname, "src/assets/fonts"),
       "@app": path.resolve(__dirname, "src/App"),
+      "@core": path.resolve(__dirname, "src/App/core"),
+      "@world": path.resolve(__dirname, "src/App/world"),
       "@styles": path.resolve(__dirname, "src/styles"),
     },
   },

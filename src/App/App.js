@@ -1,12 +1,17 @@
 import * as THREE from "three";
-import Sizes from "@app/core/Sizes";
-import Loop from "@app/core/Loop";
-import Camera from "@app/camera";
-import Renderer from "@app/renderer";
+// core
+import Sizes from "@core/Sizes";
+import Loop from "@core/Loop";
+import Camera from "@core/camera";
+import { cameraOptions } from "@core/camera/cameraOptions";
+import Renderer from "@core/renderer";
+import AssetLoader from "@core/assetLoader";
+// textures and env
+import source from "@app/textures/";
+import Environment from "@app/environment";
+import config from "@app/environment/config";
+// world
 import World from "@app/world";
-import AssetLoader from "@app/core/assetLoader";
-import { cameraOptions } from "@app/camera/cameraOptions";
-import source from "@app/core/assetLoader/source";
 
 class App {
   constructor(canvas) {
@@ -22,9 +27,8 @@ class App {
 
     this.scene = new THREE.Scene();
     this.assetLoader = new AssetLoader(source);
-    this.assetLoader.emitter.on("assetsLoaded", () => {
-      this.world = new World(this);
-    });
+    this.onAssetsLoaded = this.onAssetsLoaded.bind(this);
+    this.assetLoader.emitter.on("assetsLoaded", this.onAssetsLoaded);
     this.cameraManager = new Camera(cameraOptions, this);
     this.renderer = new Renderer(this);
   }
@@ -37,6 +41,14 @@ class App {
   update() {
     this.cameraManager.update();
     this.renderer.update();
+  }
+
+  onAssetsLoaded() {
+    this.environment = new Environment(this, config);
+    this.world = new World(this);
+    // this.world.emitter.on("worldReady", {
+    // this.environment.updateMaterials()
+    // })
   }
 }
 

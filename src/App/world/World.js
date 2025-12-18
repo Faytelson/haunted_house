@@ -1,18 +1,17 @@
 import * as THREE from "three";
-import Environment from "@app/world/environment";
-import config from "@app/world/environment/config";
+import Ground from "@world/ground";
 
 class World {
   constructor(app) {
     this.scene = app.scene;
+    this.assets = app.assetLoader.assets;
 
-    const testMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(10, 10, 10),
-      new THREE.MeshStandardMaterial({ color: 0xa3c9fd }),
-    );
+    this.addMeshesToScene();
+    // когда весь мир будет готов, эмитим событие готовности, а в app реализуем действие по этому эмиту
+  }
 
-    this.scene.add(testMesh);
-    this.environment = new Environment(this, config);
+  addMeshesToScene() {
+    this.scene.add(new Ground(this.assets).getMesh());
   }
 }
 
