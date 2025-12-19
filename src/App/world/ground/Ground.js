@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { METRICS } from "@world/metrics";
 
 class Ground {
   constructor(assets) {
@@ -10,7 +11,7 @@ class Ground {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(150, 200);
+    this.geometry = new THREE.PlaneGeometry(METRICS.ground.width, METRICS.ground.height);
   }
 
   setMaterial() {
@@ -23,7 +24,6 @@ class Ground {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.z = -50;
     this.mesh.rotation.x = -Math.PI / 2;
     this.mesh.receiveShadow = true;
   }

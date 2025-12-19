@@ -6,6 +6,7 @@ import groundTexture from "@app/textures/groundTexture";
 import houseRoadTexture from "@app/textures/houseRoadTexture";
 import houseWallsTexture from "@app/textures/houseWallsTexture";
 import roofTexture from "@app/textures/roofTexture";
+import forestAssets from "@world/forest/assets";
 
 export default [].concat(
   envTexture,
@@ -16,4 +17,5 @@ export default [].concat(
   houseRoadTexture,
   houseWallsTexture,
   roofTexture,
+  forestAssets
 );

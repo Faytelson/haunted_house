@@ -23,7 +23,8 @@ class Camera {
       this.near,
       this.far,
     );
-    this.instance.position.copy(new THREE.Vector3(this.start.x, this.start.y, this.start.z));
+    // this.instance.position.copy(new THREE.Vector3(this.start.x, this.start.y, this.start.z));
+    this.instance.position.copy(new THREE.Vector3(0, 70, 200));
     // this.instance.lookAt(this.target.x, this.target.y, this.target.z);
     this.scene.add(this.instance);
   }
@@ -31,11 +32,11 @@ class Camera {
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
     this.controls.enableDamping = true;
-    this.controls.rotateSpeed = 0.1;
-    this.controls.zoomSpeed = 0.5;
-    this.controls.panSpeed = 0.5;
-    this.controls.minDistance = 5;
-    this.controls.maxDistance = 50;
+    // this.controls.rotateSpeed = 0.1;
+    // this.controls.zoomSpeed = 0.5;
+    // this.controls.panSpeed = 0.5;
+    // this.controls.minDistance = 5;
+    // this.controls.maxDistance = 50;
     this.controls.target.set(this.target.x, this.target.y, this.target.z);
   }
 

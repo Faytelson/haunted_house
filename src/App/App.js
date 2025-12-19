@@ -6,8 +6,8 @@ import Camera from "@core/camera";
 import { cameraOptions } from "@core/camera/cameraOptions";
 import Renderer from "@core/renderer";
 import AssetLoader from "@core/assetLoader";
-// textures and env
-import source from "@app/textures/";
+import source from "@core/assetLoader/source";
+// env
 import Environment from "@app/environment";
 import config from "@app/environment/config";
 // world

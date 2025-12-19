@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Ground from "@world/ground";
+import Forest from "@world/forest/";
 
 class World {
   constructor(app) {
@@ -12,6 +13,7 @@ class World {
 
   addMeshesToScene() {
     this.scene.add(new Ground(this.assets).getMesh());
+    this.scene.add(new Forest(this.assets.models.forestTrees).getObject());
   }
 }
 
