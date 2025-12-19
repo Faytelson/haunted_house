@@ -2,30 +2,39 @@ import * as THREE from "three";
 import { METRICS } from "@world/metrics";
 
 class Ground {
-  constructor(assets) {
-    this.assets = assets;
-
-    this.setGeometry();
-    this.setMaterial();
-    this.setMesh();
+  constructor(texture) {
+    this.texture = texture;
+    this.createGeometry();
+    this.setTexture();
+    this.createMaterial();
+    this.createMesh();
   }
 
-  setGeometry() {
+  createGeometry() {
     this.geometry = new THREE.PlaneGeometry(METRICS.ground.width, METRICS.ground.height);
   }
 
-  setMaterial() {
+  setTexture() {
+    const texture = this.texture;
+    for (const key in texture) {
+      texture[key].repeat.x = 40;
+      texture[key].repeat.y = 40;
+      texture[key].wrapS = THREE.RepeatWrapping;
+      texture[key].wrapT = THREE.RepeatWrapping;
+    }
+    texture.color.colorSpace = THREE.SRGBColorSpace;
+  }
+
+  createMaterial() {
     this.material = new THREE.MeshStandardMaterial({
-      map: this.assets.textures.grassTexture.color,
-      normalMap: this.assets.textures.grassTexture.normal,
-      roughnessMap: this.assets.textures.grassTexture.roughness,
+      map: this.texture.color,
+      normalMap: this.texture.normal,
+      roughnessMap: this.texture.roughness,
     });
   }
 
-  setMesh() {
+  createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.rotation.x = -Math.PI / 2;
-    this.mesh.receiveShadow = true;
   }
 
   getMesh() {
