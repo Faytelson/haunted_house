@@ -1,50 +1,6 @@
 import * as THREE from "three";
-import { getOffsetByAngle } from "../../actions";
 import { houseWallsTexture } from "../../textures/houseWallsTexture";
-import { roofTexture } from "../../textures/roofTexture";
 import { tooltipAnchorHouse } from "../tooltips";
-
-// ROOF
-// left slope
-const slopeHeight = Math.sqrt(houseWidthHalf ** 2 + secondFloorHeight ** 2);
-const slopeAngle = Math.acos(houseWidthHalf / slopeHeight);
-const slopeOffset = 0.6;
-const slopeHeightWithOffset = slopeHeight + slopeOffset;
-const roofMaterial = new THREE.MeshStandardMaterial({
-  map: roofTexture.color,
-  aoMap: roofTexture.ambientOcclusion,
-  aoMapIntensity: 2.0,
-  normalMap: roofTexture.normal,
-  roughnessMap: roofTexture.roughness,
-  displacementMap: roofTexture.height,
-  displacementScale: 0.06,
-  side: THREE.DoubleSide,
-});
-
-const leftSlope = new THREE.Mesh(
-  new THREE.BoxGeometry(houseLength + 0.8, slopeHeightWithOffset, 0.05, 200, 200),
-  roofMaterial,
-);
-
-leftSlope.geometry.rotateY(Math.PI / 2);
-leftSlope.rotation.z = -(Math.PI / 2 - slopeAngle);
-const [slopeOffsetX, slopeOffsetY] = getOffsetByAngle(slopeHeight / 2, slopeAngle);
-const [slopeOffsetX2, slopeOffsetY2] = getOffsetByAngle(slopeOffset / 2, slopeAngle);
-leftSlope.position.x = -slopeOffsetX - slopeOffsetX2;
-leftSlope.position.y = slopeOffsetY - slopeOffsetY2;
-
-// right slope
-const rightSlope = leftSlope.clone();
-rightSlope.rotation.z = Math.PI / 2 - slopeAngle;
-rightSlope.position.x = slopeOffsetX + slopeOffsetX2;
-secondFloor.add(leftSlope, rightSlope);
-
-secondFloor.traverse((child) => {
-  if (child.isMesh) {
-    child.castShadow = true;
-    child.receiveShadow = false;
-  }
-});
 
 // PORCH
 const porchLength = 2;

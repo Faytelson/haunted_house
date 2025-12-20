@@ -16,4 +16,9 @@ export const METRICS = {
     width: 1.4 * 1.5,
     height: 2,
   },
+  roof: {
+    slopeOffset: 0.6,
+    offsetByLength: 1,
+    depth: 0.05,
+  },
 };

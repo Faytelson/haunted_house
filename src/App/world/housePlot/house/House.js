@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import Walls from "@house/walls";
 import Door from "@house/door";
-import Gable from "./gable";
+import Gable from "@house/gable";
+import Roof from "@house/roof";
 import { METRICS } from "@world/metrics";
 
 class House {
@@ -11,6 +12,7 @@ class House {
     this.addWalls();
     this.addDoor();
     this.addGables();
+    this.addRoof();
   }
 
   addWalls() {
@@ -47,6 +49,12 @@ class House {
     gableWindow.position.y = METRICS.house.firstFloorHeight;
     gableWindow.position.z = METRICS.house.length / 2;
     this.group.add(gableWindow);
+  }
+
+  addRoof() {
+    const roof = new Roof(this.assets.textures.roofTexture).getObject();
+    roof.position.y = METRICS.house.firstFloorHeight;
+    this.group.add(roof);
   }
 
   getObject() {
