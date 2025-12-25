@@ -21,4 +21,17 @@ export const METRICS = {
     offsetByLength: 1,
     depth: 0.05,
   },
+  barn: {
+    width: 4,
+    height: 3.5,
+    length: 5,
+    roofOffsetX: 0.8,
+    roofOffsetZ: 0.6,
+  },
+  fence: {
+    width: 35,
+    height: 2,
+    thickness: 0.05,
+    gatesWidth: 3,
+  },
 };

@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import MeshAssembler from "@world/MeshAssembler";
-import { METRICS } from "@world/metrics";
 
 class Walls extends MeshAssembler {
-  constructor(texture) {
+  constructor(texture, metrics) {
     super(texture);
     this.texture = texture;
+    this.metrics = metrics;
     this.createGeometry();
     this.setTexture();
     this.createMaterial();
@@ -13,14 +13,8 @@ class Walls extends MeshAssembler {
   }
 
   createGeometry() {
-    this.geometry = new THREE.BoxGeometry(
-      METRICS.house.width,
-      METRICS.house.firstFloorHeight,
-      METRICS.house.length,
-      50,
-      50,
-      50,
-    );
+    const { width, firstFloorHeight, length } = this.metrics;
+    this.geometry = new THREE.BoxGeometry(width, firstFloorHeight, length, 50, 50, 50);
   }
 
   setTexture() {

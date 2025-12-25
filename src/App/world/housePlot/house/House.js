@@ -1,34 +1,39 @@
 import * as THREE from "three";
-import Walls from "@house/walls";
-import Door from "@house/door";
-import Gable from "@house/gable";
-import Roof from "@house/roof";
+import Walls from "@world/housePlot/walls";
+import Gable from "@world/housePlot/gable";
+import Door from "@world/housePlot/door";
+import Roof from "@world/housePlot/roof";
 import { METRICS } from "@world/metrics";
 
 class House {
   constructor(assets) {
     this.assets = assets;
     this.group = new THREE.Group();
-    this.addWalls();
-    this.addDoor();
-    this.addGables();
-    this.addRoof();
+    this.createWalls();
+    this.createDoor();
+    this.createGables();
+    this.createRoof();
   }
 
-  addWalls() {
-    const walls = new Walls(this.assets.textures.houseWallsTexture).getMesh();
+  createWalls() {
+    const metrics = {
+      width: METRICS.house.width,
+      firstFloorHeight: METRICS.house.firstFloorHeight,
+      length: METRICS.house.length,
+    };
+    const walls = new Walls(this.assets.textures.houseWallsTexture, metrics).getMesh();
     walls.position.y = METRICS.house.firstFloorHeight / 2;
     this.group.add(walls);
   }
 
-  addDoor() {
+  createDoor() {
     const door = new Door(this.assets.textures.doorTexture).getMesh();
     door.position.y = METRICS.door.height / 2 + 0.3;
     door.position.z = METRICS.house.length / 2 + 0.01;
     this.group.add(door);
   }
 
-  addGables() {
+  createGables() {
     const gable = new Gable(this.assets.textures.houseWallsTexture, {
       widthHalf: METRICS.house.width / 2,
       height: METRICS.house.secondFloorHeight,
@@ -51,8 +56,8 @@ class House {
     this.group.add(gableWindow);
   }
 
-  addRoof() {
-    const roof = new Roof(this.assets.textures.roofTexture).getObject();
+  createRoof() {
+    const roof = new Roof(this.assets.textures.roofTexture, "angle").getObject();
     roof.position.y = METRICS.house.firstFloorHeight;
     this.group.add(roof);
   }
