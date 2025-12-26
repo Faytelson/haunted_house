@@ -18,6 +18,10 @@ class SceneAssembler {
     return meshes.filter(cb);
   }
 
+  setClonedMeshes() {
+    this.clonedMeshes = this.meshes.map((mesh) => mesh.clone());
+  }
+
   createInstancedMeshes(options, meshes) {
     const {
       countInRow,
