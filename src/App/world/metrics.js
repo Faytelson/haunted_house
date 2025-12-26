@@ -21,6 +21,16 @@ export const METRICS = {
     offsetByLength: 1,
     depth: 0.05,
   },
+  porch: {
+    length: 2,
+    stepHeight: 0.17,
+    stepDiff: 0.25,
+    spaceAbovePorch: 0.5,
+    thresholdSideSpace: 0.5,
+    roofThickness: 0.05,
+    roofLength: 2.4,
+    pillarRadius: 0.1,
+  },
   barn: {
     width: 4,
     height: 3.5,

@@ -3,6 +3,7 @@ import Walls from "@world/housePlot/walls";
 import Gable from "@world/housePlot/gable";
 import Door from "@world/housePlot/door";
 import Roof from "@world/housePlot/roof";
+import Porch from "@world/housePlot/porch";
 import { METRICS } from "@world/metrics";
 
 class House {
@@ -13,6 +14,7 @@ class House {
     this.createDoor();
     this.createGables();
     this.createRoof();
+    this.createPorch();
   }
 
   createWalls() {
@@ -60,6 +62,16 @@ class House {
     const roof = new Roof(this.assets.textures.roofTexture, "angle").getObject();
     roof.position.y = METRICS.house.firstFloorHeight;
     this.group.add(roof);
+  }
+
+  createPorch() {
+    const porch = new Porch(
+      this.assets.textures.houseWallsTexture,
+      this.assets.textures.roofTexture,
+    ).getObject();
+    porch.position.y = METRICS.porch.stepHeight / 2;
+    porch.position.z = METRICS.house.length / 2 + METRICS.porch.length / 2;
+    this.group.add(porch);
   }
 
   getObject() {
