@@ -24,7 +24,7 @@ class Porch {
       aoMapIntensity: 1.0,
       normalMap: texture.normal,
       roughnessMap: texture.roughness,
-      displacementMap: texture.height,
+      displacementMap: texture.displacement,
       displacementScale: 0.002,
       side: THREE.DoubleSide,
     });

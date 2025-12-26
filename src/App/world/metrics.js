@@ -44,4 +44,11 @@ export const METRICS = {
     thickness: 0.05,
     gatesWidth: 3,
   },
+  backYard: {
+    offset: 0.2,
+  },
+  houseRoad: {
+    length: 10.2,
+    offset: 2,
+  },
 };

@@ -4,6 +4,8 @@ import Forest from "@world/forest/";
 import House from "@world/housePlot/house/";
 import Barn from "@world/housePlot/barn";
 import Fence from "@world/housePlot/fence";
+import BackYardGround from "@world/housePlot/backYardGround";
+import HouseRoad from "@world/housePlot/HouseRoad";
 import { METRICS } from "@world/metrics";
 
 class World {
@@ -14,6 +16,8 @@ class World {
     this.createHouse();
     this.createBarn();
     this.createFence();
+    this.createBackYardGround();
+    this.createHouseRoad();
     // this.createForest();
     // когда весь мир будет готов, эмитим событие готовности, а в app реализуем действие по этому эмиту
   }
@@ -40,6 +44,24 @@ class World {
   createFence() {
     const fence = new Fence(this.assets.textures.fenceTexture).getObject();
     this.scene.add(fence);
+  }
+
+  createBackYardGround() {
+    const backYardGroundClass = new BackYardGround(this.assets.textures.grassTexture);
+    const backYardGround = backYardGroundClass.getMesh();
+    backYardGround.rotation.x = -Math.PI / 2;
+    const length = backYardGroundClass.getLength();
+    backYardGround.position.z = length / 2 - METRICS.fence.width / 2 + 0.1;
+    backYardGround.position.y = 0.001;
+    this.scene.add(backYardGround);
+  }
+
+  createHouseRoad() {
+    const houseRoad = new HouseRoad(this.assets.textures.houseRoadTexture).getMesh();
+    houseRoad.rotation.x = -Math.PI / 2;
+    houseRoad.position.y = 0.001;
+    houseRoad.position.z = (METRICS.fence.width / 2 - METRICS.houseRoad.length / 2) - 0.1;
+    this.scene.add(houseRoad);
   }
 
   createForest() {
