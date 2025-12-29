@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import SceneAssembler from "@world/SceneAssembler";
 
-class FrontYardPlants extends SceneAssembler {
+class RealisticGrass extends SceneAssembler {
   constructor(modelRoot) {
     super(modelRoot);
     this.modelScene = modelRoot.scene;
@@ -9,20 +9,18 @@ class FrontYardPlants extends SceneAssembler {
     this.getMeshesFromScene();
     this.setClonedMeshes();
     this.createPlants();
-    this.enableShadows();
   }
 
   createPlants() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 2,
-        countInColumn: 7,
-        stepInRow: 4,
-        stepInColumn: 1.5,
-        rangeInRow: 0.4,
-        rangeInColumn: 0.6,
-        scale: 0.8,
-        rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
+        countInRow: 12,
+        countInColumn: 5,
+        stepInRow: 1,
+        stepInColumn: 1.8,
+        rangeInRow: 0.6,
+        rangeInColumn: 0.4,
+        scale: 2,
       },
       this.clonedMeshes,
     );
@@ -31,4 +29,4 @@ class FrontYardPlants extends SceneAssembler {
   }
 }
 
-export default FrontYardPlants;
+export default RealisticGrass;

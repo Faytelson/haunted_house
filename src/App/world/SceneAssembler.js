@@ -81,9 +81,12 @@ class SceneAssembler {
     return group;
   }
 
-  enableShadows(group) {
-    group.traverse((child) => {
-      if (child.isMesh) child.castShadow = true;
+  enableShadows() {
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
     });
   }
 

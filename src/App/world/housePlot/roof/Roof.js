@@ -9,6 +9,7 @@ class Roof {
     this.createMaterial();
     if (type === "angle") this.createAngleRoof();
     else if (type === "plane") this.createPlaneRoof();
+    this.enableShadows();
   }
 
   setTexture() {
@@ -110,6 +111,15 @@ class Roof {
     this.createBoxGeometry();
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.group.add(this.mesh);
+  }
+
+  enableShadows() {
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
   }
 
   getObject() {

@@ -35,6 +35,7 @@ class Ground {
 
   createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.receiveShadow = true;
   }
 
   getMesh() {

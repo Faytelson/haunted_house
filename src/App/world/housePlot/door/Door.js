@@ -36,11 +36,12 @@ class Door extends MeshAssembler {
       metalness: 0.7,
       side: THREE.DoubleSide,
     });
-    this.material.color.set(0x999999);
   }
 
   createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.receiveShadow = true;
+    this.mesh.castShadow = true;
   }
 }
 

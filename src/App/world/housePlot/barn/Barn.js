@@ -1,16 +1,16 @@
-import * as THREE from "three";
+import GroupAssembler from "@world/GroupAssembler";
 import Roof from "@world/housePlot/roof";
 import Door from "@world/housePlot/door";
 import Walls from "@world/housePlot/walls";
 import { METRICS } from "@world/metrics";
 
-class Barn {
+class Barn extends GroupAssembler {
   constructor(assets) {
-    this.assets = assets;
-    this.group = new THREE.Group();
+    super(assets);
     this.createRoof();
     this.createDoor();
     this.createWalls();
+    this.enableShadows();
   }
 
   createRoof() {
@@ -35,10 +35,6 @@ class Barn {
     const walls = new Walls(this.assets.textures.houseWallsTexture, metrics).getMesh();
     walls.position.y = METRICS.barn.height / 2;
     this.group.add(walls);
-  }
-
-  getObject() {
-    return this.group;
   }
 }
 

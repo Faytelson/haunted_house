@@ -12,7 +12,7 @@ class Forest extends SceneAssembler {
     this.createSideForest();
     this.setBox();
     this.setGroup();
-    this.enableShadows(this.group);
+    this.enableShadows();
   }
 
   setFilteredMeshes() {

@@ -11,6 +11,7 @@ class Fence {
     this.createBackAndSides();
     this.createLeftGate();
     this.createRightGate();
+    this.enableShadows();
   }
 
   setTexture() {
@@ -137,6 +138,15 @@ class Fence {
     mesh.position.set(x, this.gatesHeight / 2, z);
     mesh.rotation.y = angle;
     return mesh;
+  }
+
+  enableShadows() {
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
   }
 
   getObject() {

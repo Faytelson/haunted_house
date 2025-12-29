@@ -9,6 +9,7 @@ class BackYardPlants extends SceneAssembler {
     this.getMeshesFromScene();
     this.setClonedMeshes();
     this.createPlants();
+    this.enableShadows();
   }
 
   createPlants() {

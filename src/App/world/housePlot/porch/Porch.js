@@ -14,6 +14,7 @@ class Porch {
     this.createRoofMaterial();
     this.createRoof();
     this.createPillars();
+    this.enableShadows();
   }
 
   setThresholdMaterial() {
@@ -99,6 +100,15 @@ class Porch {
     const pillarRight = pillarLeft.clone();
     pillarRight.position.x = -(this.porchWidth / 2 - METRICS.porch.pillarRadius);
     this.group.add(pillarRight);
+  }
+
+  enableShadows() {
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
   }
 
   getObject() {

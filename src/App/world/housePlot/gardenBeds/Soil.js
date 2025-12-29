@@ -1,26 +1,19 @@
 import * as THREE from "three";
-import MeshAssembler from "@world/MeshAssembler";
-import { METRICS } from "@world/metrics";
 
-class HouseRoad extends MeshAssembler {
-  constructor(texture) {
-    super(texture);
-    this.width = METRICS.fence.gatesWidth - METRICS.houseRoad.offset;
-    this.createGeometry();
+class Soil {
+  constructor(config, texture) {
+    this.config = config;
+    this.texture = texture;
     this.setTexture();
     this.createMaterial();
     this.createMesh();
   }
 
-  createGeometry() {
-    this.geometry = new THREE.PlaneGeometry(this.width, METRICS.houseRoad.length, 50, 150);
-  }
-
   setTexture() {
     const texture = this.texture;
     for (const key in texture) {
-      texture[key].repeat.x = 1;
-      texture[key].repeat.y = 20;
+      texture[key].repeat.x = 3;
+      texture[key].repeat.y = 3;
       texture[key].wrapS = THREE.RepeatWrapping;
       texture[key].wrapT = THREE.RepeatWrapping;
     }
@@ -32,17 +25,25 @@ class HouseRoad extends MeshAssembler {
     this.material = new THREE.MeshStandardMaterial({
       map: texture.color,
       normalMap: texture.normal,
-      aoMap: texture.ambientOcclusion,
-      aoMapIntensity: 2,
       displacementMap: texture.displacement,
-      displacementScale: 0.06,
+      displacementScale: 0.3,
     });
   }
 
   createMesh() {
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    const { width, length, segmentsX, segmentsY, x = 0, y = 0, z = 0 } = this.config;
+    const geometry = new THREE.PlaneGeometry(width, length, segmentsX, segmentsY);
+    this.mesh = new THREE.Mesh(geometry, this.material);
+    this.mesh.rotation.x = -Math.PI / 2;
+    this.mesh.position.x = x;
+    this.mesh.position.y = y;
+    this.mesh.position.z = z;
     this.mesh.receiveShadow = true;
+  }
+
+  getMesh() {
+    return this.mesh;
   }
 }
 
-export default HouseRoad;
+export default Soil;

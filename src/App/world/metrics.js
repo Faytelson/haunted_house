@@ -51,4 +51,7 @@ export const METRICS = {
     length: 10.2,
     offset: 2,
   },
+  beds: {
+    spaceBetween: 1,
+  },
 };

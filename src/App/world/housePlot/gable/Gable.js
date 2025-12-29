@@ -61,6 +61,8 @@ class Gable extends MeshAssembler {
 
   createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.receiveShadow = true;
+    this.mesh.castShadow = true;
   }
 
   normalizeShapeUV(geometry) {

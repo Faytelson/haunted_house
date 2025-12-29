@@ -1,13 +1,13 @@
-import * as THREE from "three";
-import { createGardenBed } from "./gardenBedFactory.js";
-import { fenceWidth } from "../fence.js";
-import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../../../createInstancedMesh.js";
+// import * as THREE from "three";
+// import { createGardenBed } from "./gardenBedFactory.js";
+// import { fenceWidth } from "../fence.js";
+// import { loadScene, getMeshesFromScene, createInstancedMeshes } from "../../../createInstancedMesh.js";
 
-const gardenBedRealisticGrass = new THREE.Group();
+// const gardenBedRealisticGrass = new THREE.Group();
 // garden bed
 // оффсеты чтобы грядка не касалась забора
-const offsetX = 0.4;
-const offsetZ = 1;
+// const offsetX = 0.4;
+// const offsetZ = 1;
 const spaceBetween = 3;
 const width = 13;
 const length = 9;

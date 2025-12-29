@@ -29,7 +29,7 @@ class HouseTrees extends SceneAssembler {
 
       if (mesh.name === "SM_FreeTree_06_Free_Tree_M_0") {
         mesh.position.x = -4;
-        mesh.position.z = 17;
+        mesh.position.z = 19;
         mesh.scale.set(0.012, 0.012, 0.012);
         this.group.add(mesh);
       }
@@ -47,6 +47,7 @@ class HouseTrees extends SceneAssembler {
     this.group.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
+        child.receiveShadow = true;
       }
     });
   }
