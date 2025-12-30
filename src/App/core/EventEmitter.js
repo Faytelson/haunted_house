@@ -41,7 +41,7 @@ class EventEmitter {
         try {
           handler(...args);
         } catch (e) {
-          console.error(`Error in handler for event "${event}":`, e);
+          throw new Error(`Error in handler for event "${event}": ${e}`);
         }
       }
     }

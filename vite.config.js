@@ -9,6 +9,7 @@ export default defineConfig({
       "@app": path.resolve(__dirname, "src/App"),
       "@core": path.resolve(__dirname, "src/App/core"),
       "@world": path.resolve(__dirname, "src/App/world"),
+      "@utils": path.resolve(__dirname, "src/App/utils"),
       "@styles": path.resolve(__dirname, "src/styles"),
     },
   },

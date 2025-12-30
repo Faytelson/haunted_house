@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import collectInteractables from "@utils/collectInteractables";
 // core
 import Sizes from "@core/Sizes";
 import Loop from "@core/Loop";
@@ -7,6 +8,10 @@ import { cameraOptions } from "@core/camera/cameraOptions";
 import Renderer from "@core/renderer";
 import AssetLoader from "@core/assetLoader";
 import source from "@core/assetLoader/source";
+import InputManager from "@core/inputManager";
+import Raycaster from "@core/raycaster";
+import TooltipManager from "@core/tooltipManager";
+import tooltipData from "@core/tooltipManager/tooltipData";
 // env
 import Environment from "@app/environment";
 import config from "@app/environment/config";
@@ -29,6 +34,10 @@ class App {
     this.assetLoader = new AssetLoader(source);
     this.onAssetsLoaded = this.onAssetsLoaded.bind(this);
     this.assetLoader.emitter.on("assetsLoaded", this.onAssetsLoaded);
+
+    this.inputManager = new InputManager(this.canvas);
+    this.mouse = this.inputManager.getMouse();
+
     this.cameraManager = new Camera(cameraOptions, this);
     this.renderer = new Renderer(this);
   }
@@ -46,9 +55,28 @@ class App {
   onAssetsLoaded() {
     this.environment = new Environment(this, config);
     this.world = new World(this);
+    this.setInteraction();
     // this.world.emitter.on("worldReady", {
     // this.environment.updateMaterials()
+    // this.setInteraction();
     // })
+  }
+
+  setInteraction() {
+    this.interactables = collectInteractables(this.scene);
+    this.raycaster = new Raycaster(this.interactables);
+    this.tooltipManager = new TooltipManager(tooltipData);
+    let hit;
+    this.tooltipManager.setHTMLElements();
+
+    this.updateMouse = this.inputManager.updateMousePosition.bind(this.inputManager);
+    window.addEventListener("mousemove", (e) => {
+      this.updateMouse(e);
+      this.raycaster.castFromCamera(this.mouse, this.cameraManager.instance);
+      const intersections = this.raycaster.getIntersection();
+      hit = intersections[0] ?? null;
+      this.tooltipManager.setTooltips(hit);
+    });
   }
 }
 

@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import GroupAssembler from "@world/GroupAssembler";
 import Roof from "@world/housePlot/roof";
 import Door from "@world/housePlot/door";
@@ -10,6 +11,8 @@ class Barn extends GroupAssembler {
     this.createRoof();
     this.createDoor();
     this.createWalls();
+    this.setAnchor();
+    this.setId();
     this.enableShadows();
   }
 
@@ -35,6 +38,21 @@ class Barn extends GroupAssembler {
     const walls = new Walls(this.assets.textures.houseWallsTexture, metrics).getMesh();
     walls.position.y = METRICS.barn.height / 2;
     this.group.add(walls);
+  }
+
+  setId() {
+    this.group.userData.isInteractable = true;
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.userData.tooltipID = "barn";
+        child.userData.anchor = this.anchor;
+      }
+    });
+  }
+
+  setAnchor() {
+    this.anchor = new THREE.Object3D();
+    this.anchor.position.set(6, METRICS.barn.height + 1, METRICS.barn.length / 2);
   }
 }
 

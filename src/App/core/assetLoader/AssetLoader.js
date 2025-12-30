@@ -18,7 +18,6 @@ class AssetLoader {
 
     this.loadingManager.onLoad = () => {
       this.emitter.emit("assetsLoaded");
-      console.log(this.assets)
     };
 
     this.loadingManager.onError = (url) => {

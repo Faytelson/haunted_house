@@ -1,12 +1,12 @@
 const startLoop = (camera, raycaster, renderer, scene) => {
   camera.lookAt(cameraTarget.x, cameraTarget.y, cameraTarget.z);
 
-  raycaster.setFromCamera(input.mouse, camera);
-  const houseIntersects = raycaster.intersectObjects(houseObjectsToIntersect);
+  // raycaster.setFromCamera(input.mouse, camera);
+  // const houseIntersects = raycaster.intersectObjects(houseObjectsToIntersect);
   portfolioLabel.classList.toggle("label_visible", houseIntersects.length > 0);
-  const barnIntersects = raycaster.intersectObjects(barnObjectsToIntersect);
+  // const barnIntersects = raycaster.intersectObjects(barnObjectsToIntersect);
   foodLabel.classList.toggle("label_visible", barnIntersects.length > 0);
-  const treesIntersects = raycaster.intersectObjects(treesObjectsToIntersect);
+  // const treesIntersects = raycaster.intersectObjects(treesObjectsToIntersect);
   objectsLabel.classList.toggle("label_visible", treesIntersects.length > 0);
 
   if (input.pointerDown) {

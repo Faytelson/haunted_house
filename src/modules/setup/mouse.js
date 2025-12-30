@@ -1,5 +1,5 @@
 const mouse = {
-  object: new THREE.Vector2(),
+  // object: new THREE.Vector2(),
   pointerDown: false,
 };
 

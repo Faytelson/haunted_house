@@ -15,6 +15,8 @@ class House {
     this.createGables();
     this.createRoof();
     this.createPorch();
+    this.setAnchor();
+    this.setId();
     this.enableShadows();
   }
 
@@ -73,6 +75,25 @@ class House {
     porch.position.y = METRICS.porch.stepHeight / 2;
     porch.position.z = METRICS.house.length / 2 + METRICS.porch.length / 2;
     this.group.add(porch);
+  }
+
+  setId() {
+    this.group.userData.isInteractable = true;
+    this.group.traverse((child) => {
+      if (child.isMesh) {
+        child.userData.tooltipID = "house";
+        child.userData.anchor = this.anchor;
+      }
+    });
+  }
+
+  setAnchor() {
+    this.anchor = new THREE.Object3D();
+    this.anchor.position.set(
+      0,
+      METRICS.house.firstFloorHeight + METRICS.house.secondFloorHeight + 1,
+      METRICS.house.length / 2,
+    );
   }
 
   enableShadows() {

@@ -1,6 +1,6 @@
 function updateMousePosition(event, mouse, canvasRect) {
-  input.mouse.x = ((event.clientX - canvasRect.left) / canvasRect.width) * 2 - 1;
-  input.mouse.y = -((event.clientY - canvasRect.top) / canvasRect.height) * 2 + 1;
+  // input.mouse.x = ((event.clientX - canvasRect.left) / canvasRect.width) * 2 - 1;
+  // input.mouse.y = -((event.clientY - canvasRect.top) / canvasRect.height) * 2 + 1;
 
   if (event.type === "pointerdown") {
   }
