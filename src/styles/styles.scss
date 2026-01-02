@@ -26,10 +26,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: opacity 0.3s ease;
 
   &_visible {
     opacity: 1;
-    transition: opacity 0.3s ease;
   }
 }
 

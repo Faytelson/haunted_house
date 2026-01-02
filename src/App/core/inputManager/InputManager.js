@@ -6,10 +6,14 @@ class InputManager {
     this.mouse = new THREE.Vector2();
   }
 
+  getRect() {
+    this.rect = this.canvas.getBoundingClientRect();
+  }
+
   updateMousePosition(event) {
-    const rect = this.canvas.getBoundingClientRect();
-    let x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    let y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    this.getRect();
+    let x = ((event.clientX - this.rect.left) / this.rect.width) * 2 - 1;
+    let y = -((event.clientY - this.rect.top) / this.rect.height) * 2 + 1;
 
     x = Math.max(-1, Math.min(1, x));
     y = Math.max(-1, Math.min(1, y));
