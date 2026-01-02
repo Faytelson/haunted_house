@@ -1,6 +1,8 @@
 import * as THREE from "three";
+import gsap from "gsap";
 import collectInteractables from "@utils/collectInteractables";
 // core
+import Preloader from "@core/preloader";
 import Sizes from "@core/Sizes";
 import Loop from "@core/Loop";
 import Camera from "@core/camera";
@@ -23,6 +25,8 @@ class App {
     this.canvas = canvas;
     this.sizes = new Sizes();
 
+    this.preloader = new Preloader();
+
     this.resize = this.resize.bind(this);
     this.sizes.emitter.on("resize", this.resize);
 
@@ -38,6 +42,9 @@ class App {
     this.assetLoader = new AssetLoader(source);
     this.onAssetsLoaded = this.onAssetsLoaded.bind(this);
     this.assetLoader.emitter.on("assetsLoaded", this.onAssetsLoaded);
+    this.assetLoader.emitter.on("progress", (progress) => {
+      this.preloader.setProgress(progress);
+    });
 
     this.inputManager = new InputManager(this.canvas);
     this.mouse = this.inputManager.getMouse();
@@ -60,14 +67,9 @@ class App {
   onAssetsLoaded() {
     this.environment = new Environment(this, config);
     this.world = new World(this);
-    this.setInteraction(); //перенести в world ready
-  }
-
-  onWorldReady() {
-    // this.world.emitter.on("worldReady", {
-    // this.environment.updateMaterials()
-    // this.setInteraction();
-    // })
+    this.environment.updateMaterials();
+    this.setInteraction();
+    this.hidePreloader();
   }
 
   setInteraction() {
@@ -96,6 +98,18 @@ class App {
     const intersections = this.raycaster.getIntersection();
     this.hit = intersections[0] ?? null;
     this.tooltipManager.setTooltips(this.hit);
+  }
+
+  hidePreloader() {
+    const overlayTop = document.querySelector(".preloader__overlay_top");
+    overlayTop.classList.add("preloader__overlay_top_hidden");
+    const overlayBottom = document.querySelector(".preloader__overlay_bottom");
+    overlayBottom.classList.add("preloader__overlay_bottom_hidden");
+
+    const progress = document.querySelector(".preloader__progress");
+    progress.classList.add("preloader__progress_invisible");
+    const text = document.querySelector(".preloader__text");
+    text.classList.add("preloader__text_invisible");
   }
 
   setFullScreen() {

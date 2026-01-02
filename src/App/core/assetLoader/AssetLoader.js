@@ -16,6 +16,11 @@ class AssetLoader {
   setLoadingManager() {
     this.loadingManager = new THREE.LoadingManager();
 
+    this.loadingManager.onProgress = (url, loaded, total) => {
+      this.targetProgress = loaded / total;
+      this.emitter.emit("progress", this.targetProgress);
+    };
+
     this.loadingManager.onLoad = () => {
       this.emitter.emit("assetsLoaded");
     };

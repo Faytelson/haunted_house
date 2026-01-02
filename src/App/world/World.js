@@ -9,7 +9,6 @@ class World {
     this.createGround();
     // this.createForest();
     this.createHousePlot();
-    // когда весь мир будет готов, эмитим событие готовности, а в app реализуем действие по этому эмиту
   }
 
   createGround() {
