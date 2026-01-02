@@ -68,8 +68,13 @@ class App {
     this.environment = new Environment(this, config);
     this.world = new World(this);
     this.environment.updateMaterials();
-    this.setInteraction();
-    this.hidePreloader();
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.setInteraction();
+        this.hidePreloader();
+      });
+    });
   }
 
   setInteraction() {

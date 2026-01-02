@@ -9,7 +9,7 @@ class Preloader {
   }
 
   setProgressElement() {
-      this.progressElement = document.querySelector(".preloader__progress");
+    this.progressElement = document.querySelector(".preloader__progress");
   }
 
   setProgress(progress) {
@@ -18,7 +18,7 @@ class Preloader {
 
   update() {
     this.visualProgress += (this.targetProgress - this.visualProgress) * 0.1;
-    this.progressElement.style.width = `${this.visualProgress * 100}%`;
+    this.progressElement.style.transform = `scaleX(${this.visualProgress})`;
   }
 }
 
