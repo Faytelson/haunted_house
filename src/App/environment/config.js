@@ -5,7 +5,7 @@ const config = {
   ambientLightOptions,
   sunLightOptions,
   envMapOptions: {
-    intensity: 0.2,
+    intensity: 0.4,
   },
 };
 

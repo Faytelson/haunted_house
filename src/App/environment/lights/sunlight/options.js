@@ -1,10 +1,10 @@
 const options = {
-  color: 0xffc27a,
-  intensity: 2.8,
+  color: 0xffb366,
+  intensity: 3.2,
   position: {
-    x: 20,
-    y: 20,
-    z: 30,
+    x: 60,
+    y: 35,
+    z: 120,
   },
   castShadow: true,
   shadow: {
@@ -13,14 +13,14 @@ const options = {
       y: 1024,
     },
     camera: {
-      near: 0.5,
-      far: 70,
-      left: -50,
-      right: 50,
-      top: 50,
-      bottom: -50,
+      near: 1,
+      far: 150,
+      left: -80,
+      right: 80,
+      top: 80,
+      bottom: -80,
     },
-    bias: 0.05,
+    bias: -0.0005,
   },
 };
 

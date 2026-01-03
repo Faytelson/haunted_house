@@ -62,17 +62,17 @@ class TooltipManager {
   }
 
   openLink(linkID) {
-    switch (linkID) {
-      case "house":
-        window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
-        break;
-      case "barn":
-        window.open("https://food-red-six.vercel.app/", "_blank");
-        break;
-      case "tree":
-        window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
-        break;
-    }
+    // switch (linkID) {
+    //   case "house":
+    //     window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
+    //     break;
+    //   case "barn":
+    //     window.open("https://food-red-six.vercel.app/", "_blank");
+    //     break;
+    //   case "tree":
+    //     window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
+    //     break;
+    // }
     return;
   }
 }
