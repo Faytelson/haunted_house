@@ -7,7 +7,7 @@ class World {
     this.scene = app.scene;
     this.assets = app.assetLoader.assets;
     this.createGround();
-    // this.createForest();
+    this.createForest();
     this.createHousePlot();
   }
 
@@ -25,6 +25,7 @@ class World {
   createHousePlot() {
     const housePlot = new HousePlot(this.assets).getObject();
     this.scene.add(housePlot);
+    housePlot.position.z = 35;
   }
 }
 
