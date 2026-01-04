@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
+import EventEmitter from "@core/EventEmitter";
 
 class Camera {
   constructor(options, app) {
@@ -16,6 +17,7 @@ class Camera {
     this.sizes = app.sizes;
     this.canvas = app.canvas;
     this.scene = app.scene;
+    this.emitter = new EventEmitter();
 
     this.setInstance();
     this.setControls();
@@ -39,6 +41,9 @@ class Camera {
       y: this.end.y,
       z: this.end.z,
       ease: this.easing,
+      onComplete: () => {
+        this.emitter.emit("animationComplete");
+      },
     });
   }
 

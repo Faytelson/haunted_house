@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
 import collectInteractables from "@utils/collectInteractables";
+import { showAndHideElem } from "@utils/showAndHideElem";
 // core
 import Preloader from "@core/preloader";
 import Sizes from "@core/Sizes";
@@ -46,6 +47,7 @@ class App {
     this.mouse = this.inputManager.getMouse();
 
     this.cameraManager = new Camera(cameraOptions, this);
+    this.cameraManager.emitter.on("animationComplete", this.showHints);
     this.renderer = new Renderer(this);
   }
 
@@ -98,6 +100,16 @@ class App {
     const intersections = this.raycaster.getIntersection();
     this.hit = intersections[0] ?? null;
     this.tooltipManager.updateTooltips(this.hit);
+  }
+
+  async showHints() {
+    const hint1 = document.querySelector(".hint_1");
+    const hint2 = document.querySelector(".hint_2");
+    await showAndHideElem(hint1, 3000, "hint_visible");
+
+    setTimeout(() => {
+      showAndHideElem(hint2, 3000, "hint_visible");
+    }, 2000);
   }
 
   // setFullScreen() {
