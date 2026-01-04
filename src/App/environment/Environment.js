@@ -35,9 +35,6 @@ class Environment {
     Object.assign(this.sunLight.shadow.camera, camera);
     this.sunLight.shadow.bias = bias;
     this.scene.add(this.sunLight);
-
-    const helper = new THREE.DirectionalLightHelper(this.sunLight);
-    this.scene.add(helper);
   }
 
   setEnvironmentMap() {
