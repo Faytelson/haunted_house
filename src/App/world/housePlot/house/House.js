@@ -79,6 +79,8 @@ class House {
 
   setId() {
     this.group.userData.isInteractable = true;
+    this.group.userData.anchor = this.anchor;
+    this.group.userData.tooltipID = "house";
     this.group.traverse((child) => {
       if (child.isMesh) {
         child.userData.tooltipID = "house";
@@ -90,9 +92,9 @@ class House {
   setAnchor() {
     this.anchor = new THREE.Object3D();
     this.anchor.position.set(
-      0,
+      -1,
       METRICS.house.firstFloorHeight + METRICS.house.secondFloorHeight + 1,
-      METRICS.house.length / 2,
+      METRICS.house.length / 2 + METRICS.housePlot.offsetZ,
     );
   }
 

@@ -34,7 +34,7 @@ class HouseTrees extends SceneAssembler {
         mesh.userData.isInteractable = true;
         mesh.userData.tooltipID = "tree";
         const anchor = new THREE.Object3D();
-        anchor.position.set(-17, 12, 0);
+        anchor.position.set(-17, 12, METRICS.housePlot.offsetZ + METRICS.house.length / 2);
         mesh.userData.anchor = anchor;
         this.group.add(mesh);
       }

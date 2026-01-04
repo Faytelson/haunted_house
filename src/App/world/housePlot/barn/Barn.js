@@ -42,6 +42,8 @@ class Barn extends GroupAssembler {
 
   setId() {
     this.group.userData.isInteractable = true;
+    this.group.userData.anchor = this.anchor;
+    this.group.userData.tooltipID = "barn";
     this.group.traverse((child) => {
       if (child.isMesh) {
         child.userData.tooltipID = "barn";
@@ -52,7 +54,11 @@ class Barn extends GroupAssembler {
 
   setAnchor() {
     this.anchor = new THREE.Object3D();
-    this.anchor.position.set(6, METRICS.barn.height + 1, METRICS.barn.length / 2);
+    this.anchor.position.set(
+      6,
+      METRICS.barn.height + 1,
+      METRICS.barn.length / 2 + METRICS.housePlot.offsetZ - METRICS.fence.width / 2,
+    );
   }
 }
 

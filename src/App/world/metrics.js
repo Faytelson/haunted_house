@@ -54,4 +54,7 @@ export const METRICS = {
   beds: {
     spaceBetween: 1,
   },
+  housePlot: {
+    offsetZ: 35,
+  },
 };

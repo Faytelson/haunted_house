@@ -1,32 +1,35 @@
 import * as THREE from "three";
 
 class TooltipManager {
-  constructor(tooltipSrc, camera, sizes) {
+  constructor(tooltipSrc, interactables, camera, sizes) {
     this.tooltipSrc = tooltipSrc;
+    this.interactables = interactables;
     this.camera = camera;
     this.sizes = sizes;
-    this.setHTMLElements();
+    this.setTooltipData();
   }
 
-  setHTMLElements() {
+  setTooltipData() {
     this.tooltips = [];
     this.tooltipSrc.forEach((t) => {
+      const interactable = this.interactables.filter(
+        (i) => i.userData.tooltipID === t.tooltipID,
+      )[0];
       const obj = {
         ...t,
         elem: document.querySelector(`.label_${t.labelID}`),
+        anchor: interactable.userData.anchor,
       };
       this.tooltips.push(obj);
     });
   }
 
-  setTooltips(intersect) {
+  updateTooltips(intersect) {
     if (!intersect) this.setLabelVisibility(null);
     this.tooltips.forEach((t) => {
+      this.updateLabelPosition(t.anchor, t.elem, this.camera, this.sizes);
       if (t.tooltipID === intersect?.object.userData.tooltipID) {
-        const anchor = intersect?.object.userData.anchor;
-        t.elem.classList.add("label_visible");
         this.setLabelVisibility(t.elem);
-        this.updateLabelPosition(anchor, t.elem, this.camera, this.sizes);
       }
     });
   }
@@ -52,7 +55,7 @@ class TooltipManager {
 
   updateLabelPosition(object, labelEl, camera, sizes) {
     const vector = new THREE.Vector3();
-    vector.copy(object.position);
+    object.getWorldPosition(vector);
     vector.project(camera);
 
     const x = ((vector.x + 1) / 2) * sizes.width;
@@ -62,17 +65,17 @@ class TooltipManager {
   }
 
   openLink(linkID) {
-    // switch (linkID) {
-    //   case "house":
-    //     window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
-    //     break;
-    //   case "barn":
-    //     window.open("https://food-red-six.vercel.app/", "_blank");
-    //     break;
-    //   case "tree":
-    //     window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
-    //     break;
-    // }
+    switch (linkID) {
+      case "house":
+        window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
+        break;
+      case "barn":
+        window.open("https://food-red-six.vercel.app/", "_blank");
+        break;
+      case "tree":
+        window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
+        break;
+    }
     return;
   }
 }

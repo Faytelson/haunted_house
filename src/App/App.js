@@ -30,10 +30,6 @@ class App {
     this.resize = this.resize.bind(this);
     this.sizes.emitter.on("resize", this.resize);
 
-    this.canvas.addEventListener("dblclick", () => {
-      this.setFullScreen(this.canvas);
-    });
-
     this.loop = new Loop();
     this.update = this.update.bind(this);
     this.loop.emitter.on("loop", this.update);
@@ -62,6 +58,7 @@ class App {
   update() {
     this.cameraManager.update();
     this.renderer.update();
+    if (this.raycaster) this.updateInteraction();
   }
 
   onAssetsLoaded() {
@@ -81,20 +78,20 @@ class App {
   setInteraction() {
     this.interactables = collectInteractables(this.scene);
     this.raycaster = new Raycaster(this.interactables);
-    this.tooltipManager = new TooltipManager(tooltipData, this.cameraManager.instance, this.sizes);
+    this.tooltipManager = new TooltipManager(
+      tooltipData,
+      this.interactables,
+      this.cameraManager.instance,
+      this.sizes,
+    );
     this.hit = null;
     this.updateMouse = this.inputManager.updateMousePosition.bind(this.inputManager);
 
     window.addEventListener("mousemove", (e) => {
       this.updateMouse(e);
-      this.updateInteraction();
     });
 
-    window.addEventListener("resize", () => {
-      this.updateInteraction();
-    });
-
-    window.addEventListener("pointerdown", () => {
+    window.addEventListener("dblclick", () => {
       this.tooltipManager.openLink(this.hit?.object.userData.tooltipID);
     });
   }
@@ -103,7 +100,7 @@ class App {
     this.raycaster.castFromCamera(this.mouse, this.cameraManager.instance);
     const intersections = this.raycaster.getIntersection();
     this.hit = intersections[0] ?? null;
-    this.tooltipManager.setTooltips(this.hit);
+    this.tooltipManager.updateTooltips(this.hit);
   }
 
   hidePreloader() {
@@ -118,35 +115,35 @@ class App {
     text.classList.add("preloader__text_invisible");
   }
 
-  setFullScreen() {
-    const doc = document;
-    const isFullscreen =
-      doc.fullscreenElement ||
-      doc.webkitFullscreenElement ||
-      doc.mozFullScreenElement ||
-      doc.msFullscreenElement;
-    if (!isFullscreen) {
-      if (this.canvas.requestFullscreen) {
-        this.canvas.requestFullscreen();
-      } else if (this.canvas.webkitRequestFullscreen) {
-        this.canvas.webkitRequestFullscreen();
-      } else if (this.canvas.mozRequestFullScreen) {
-        this.canvas.mozRequestFullScreen();
-      } else if (this.canvas.msRequestFullscreen) {
-        this.canvas.msRequestFullscreen();
-      }
-    } else {
-      if (doc.exitFullscreen) {
-        doc.exitFullscreen();
-      } else if (doc.webkitExitFullscreen) {
-        doc.webkitExitFullscreen();
-      } else if (doc.mozCancelFullScreen) {
-        doc.mozCancelFullScreen();
-      } else if (doc.msExitFullscreen) {
-        doc.msExitFullscreen();
-      }
-    }
-  }
+  // setFullScreen() {
+  //   const doc = document;
+  //   const isFullscreen =
+  //     doc.fullscreenElement ||
+  //     doc.webkitFullscreenElement ||
+  //     doc.mozFullScreenElement ||
+  //     doc.msFullscreenElement;
+  //   if (!isFullscreen) {
+  //     if (this.canvas.requestFullscreen) {
+  //       this.canvas.requestFullscreen();
+  //     } else if (this.canvas.webkitRequestFullscreen) {
+  //       this.canvas.webkitRequestFullscreen();
+  //     } else if (this.canvas.mozRequestFullScreen) {
+  //       this.canvas.mozRequestFullScreen();
+  //     } else if (this.canvas.msRequestFullscreen) {
+  //       this.canvas.msRequestFullscreen();
+  //     }
+  //   } else {
+  //     if (doc.exitFullscreen) {
+  //       doc.exitFullscreen();
+  //     } else if (doc.webkitExitFullscreen) {
+  //       doc.webkitExitFullscreen();
+  //     } else if (doc.mozCancelFullScreen) {
+  //       doc.mozCancelFullScreen();
+  //     } else if (doc.msExitFullscreen) {
+  //       doc.msExitFullscreen();
+  //     }
+  //   }
+  // }
 }
 
 export default App;

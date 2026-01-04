@@ -1,6 +1,7 @@
 import Ground from "@world/ground";
 import Forest from "@world/forest/";
 import HousePlot from "@world/housePlot";
+import { METRICS } from "@world/metrics";
 
 class World {
   constructor(app) {
@@ -26,7 +27,7 @@ class World {
   createHousePlot() {
     const housePlot = new HousePlot(this.assets).getObject();
     this.scene.add(housePlot);
-    housePlot.position.z = 35;
+    housePlot.position.z = METRICS.housePlot.offsetZ;
   }
 }
 
