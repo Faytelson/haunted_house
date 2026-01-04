@@ -44,6 +44,7 @@ class Forest extends SceneAssembler {
   createSideForest() {
     const instanced = this.createInstancedMeshes(
       {
+
         countInRow: 6,
         countInColumn: 4,
         stepInRow: 6,
