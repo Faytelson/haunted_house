@@ -19,6 +19,13 @@ class Renderer {
     this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
+  }
+
+  compile() {
+    return this.instance.compileAsync(this.scene, this.camera);
+  }
+
+  render() {
     this.instance.render(this.scene, this.camera);
   }
 

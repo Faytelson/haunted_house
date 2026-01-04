@@ -61,18 +61,15 @@ class App {
     if (this.raycaster) this.updateInteraction();
   }
 
-  onAssetsLoaded() {
+  async onAssetsLoaded() {
     this.environment = new Environment(this, config);
     this.world = new World(this);
     this.environment.updateMaterials();
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        this.setInteraction();
-        this.hidePreloader();
-        this.cameraManager.animate();
-      });
-    });
+    await this.renderer.compile();
+    this.renderer.render();
+    this.setInteraction();
+    this.preloader.hide(1100);
+    this.cameraManager.animate();
   }
 
   setInteraction() {
@@ -101,18 +98,6 @@ class App {
     const intersections = this.raycaster.getIntersection();
     this.hit = intersections[0] ?? null;
     this.tooltipManager.updateTooltips(this.hit);
-  }
-
-  hidePreloader() {
-    const overlayTop = document.querySelector(".preloader__overlay_top");
-    overlayTop.classList.add("preloader__overlay_top_hidden");
-    const overlayBottom = document.querySelector(".preloader__overlay_bottom");
-    overlayBottom.classList.add("preloader__overlay_bottom_hidden");
-
-    const progress = document.querySelector(".preloader__progress");
-    progress.classList.add("preloader__progress_invisible");
-    const text = document.querySelector(".preloader__text");
-    text.classList.add("preloader__text_invisible");
   }
 
   // setFullScreen() {

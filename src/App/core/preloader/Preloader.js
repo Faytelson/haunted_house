@@ -2,10 +2,8 @@ import gsap from "gsap";
 
 class Preloader {
   constructor() {
+    this.progress = 0;
     this.setProgressElement();
-    this.targetProgress = 0;
-    this.visualProgress = 0;
-    gsap.ticker.add(this.update.bind(this));
   }
 
   setProgressElement() {
@@ -13,12 +11,28 @@ class Preloader {
   }
 
   setProgress(progress) {
-    this.targetProgress = progress;
+    gsap.to(this, {
+      progress: progress,
+      duration: 0.4,
+      ease: "circ.in",
+      onUpdate: () => {
+        this.progressElement.style.transform = `scaleX(${this.progress})`;
+      },
+    });
   }
 
-  update() {
-    this.visualProgress += (this.targetProgress - this.visualProgress) * 0.1;
-    this.progressElement.style.transform = `scaleX(${this.visualProgress})`;
+  hide(delay) {
+    setTimeout(() => {
+      const overlayTop = document.querySelector(".preloader__overlay_top");
+      overlayTop.classList.add("preloader__overlay_top_hidden");
+      const overlayBottom = document.querySelector(".preloader__overlay_bottom");
+      overlayBottom.classList.add("preloader__overlay_bottom_hidden");
+    }, delay);
+
+    const progress = document.querySelector(".preloader__progress");
+    progress.classList.add("preloader__progress_invisible");
+    const text = document.querySelector(".preloader__text");
+    text.classList.add("preloader__text_invisible");
   }
 }
 
