@@ -9,20 +9,20 @@
 
 .label {
   position: absolute;
-  background-color: #00000033;
-  color: white;
+  background-color: #00000055;
+  color: #eee;
   border-radius: 4px;
   padding: 12px 20px;
   z-index: 1;
   top: 0;
   left: 0;
   font-family: "MarckScript", cursive;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   opacity: 0;
   pointer-events: none;
-  width: 270px;
-  height: 100px;
+  max-width: 270px;
+  max-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,27 +60,14 @@
     height: 50vh;
     background-color: black;
     z-index: 1;
-
-    &_top,
-    &_bottom {
-      transition: transform 2s ease-in-out;
-    }
-
-    &_top {
-      top: 0;
-      transform: translateY(0);
-      &_hidden {
-        transform: translateY(-100%);
-      }
-    }
-
-    &_bottom {
-      bottom: 0;
-      transform: translateY(0);
-
-      &_hidden {
-        transform: translateY(100%);
-      }
+    transition: opacity 2s ease-in-out;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    &_hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   }
 

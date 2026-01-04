@@ -73,7 +73,7 @@ class TooltipManager {
         window.open("https://food-red-six.vercel.app/", "_blank");
         break;
       case "tree":
-        window.open("https://hh.ru/resume/42e2d626ff0937187c0039ed1f7a587437656e", "_blank");
+        window.open("https://3dobjects-seven.vercel.app/", "_blank");
         break;
     }
     return;

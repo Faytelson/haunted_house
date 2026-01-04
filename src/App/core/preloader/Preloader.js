@@ -23,10 +23,8 @@ class Preloader {
 
   hide(delay) {
     setTimeout(() => {
-      const overlayTop = document.querySelector(".preloader__overlay_top");
-      overlayTop.classList.add("preloader__overlay_top_hidden");
-      const overlayBottom = document.querySelector(".preloader__overlay_bottom");
-      overlayBottom.classList.add("preloader__overlay_bottom_hidden");
+      const overlay = document.querySelector(".preloader__overlay");
+      overlay.classList.add("preloader__overlay_hidden");
     }, delay);
 
     const progress = document.querySelector(".preloader__progress");
