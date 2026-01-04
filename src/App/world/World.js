@@ -19,6 +19,7 @@ class World {
 
   createForest() {
     const forest = new Forest(this.assets.models.forestTrees).getObject();
+    forest.position.x = -52;
     this.scene.add(forest);
   }
 

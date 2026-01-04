@@ -12,7 +12,6 @@ class Forest extends SceneAssembler {
     this.createSideForest();
     this.setBox();
     this.setGroup();
-    this.enableShadows();
   }
 
   setFilteredMeshes() {
@@ -27,7 +26,7 @@ class Forest extends SceneAssembler {
   createMainForest() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 26,
+        countInRow: 14,
         countInColumn: 6,
         stepInRow: 10,
         stepInColumn: 15,
@@ -45,7 +44,7 @@ class Forest extends SceneAssembler {
   createSideForest() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 18,
+        countInRow: 6,
         countInColumn: 4,
         stepInRow: 6,
         stepInColumn: 7,
@@ -55,16 +54,17 @@ class Forest extends SceneAssembler {
         rotation: new THREE.Euler(0, Math.PI / 2, 0),
       },
       this.filteredMeshes,
+      false,
     );
 
     const leftForest = this.buildGroup(instanced);
-    leftForest.position.x = -2;
-    leftForest.position.z = 80;
+    leftForest.position.x = 0;
+    leftForest.position.z = 90;
     this.group.add(leftForest);
 
     const rightForest = leftForest.clone();
-    leftForest.position.x = 144;
-    leftForest.position.z = 80;
+    leftForest.position.x = 75;
+    leftForest.position.z = 90;
     this.group.add(rightForest);
   }
 

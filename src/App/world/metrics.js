@@ -1,6 +1,6 @@
 export const METRICS = {
   ground: {
-    width: 300,
+    width: 200,
     height: 150,
   },
   house: {

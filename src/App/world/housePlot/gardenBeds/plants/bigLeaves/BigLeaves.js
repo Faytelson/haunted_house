@@ -14,9 +14,9 @@ class BigLeaves extends SceneAssembler {
   createPlants() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 10,
+        countInRow: 5,
         countInColumn: 10,
-        stepInRow: 1.2,
+        stepInRow: 2.3,
         stepInColumn: 2,
         rangeInRow: 0.6,
         rangeInColumn: 0.4,

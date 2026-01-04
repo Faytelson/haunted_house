@@ -22,7 +22,7 @@ class SceneAssembler {
     this.clonedMeshes = this.meshes.map((mesh) => mesh.clone());
   }
 
-  createInstancedMeshes(options, meshes) {
+  createInstancedMeshes(options, meshes, shadow = true) {
     const {
       countInRow,
       countInColumn,
@@ -62,9 +62,10 @@ class SceneAssembler {
         dummy.updateMatrix();
         instancedMesh.setMatrixAt(i, dummy.matrix);
       });
-
-      instancedMesh.castShadow = true;
-      instancedMesh.receiveShadow = true;
+      if (shadow) {
+        instancedMesh.castShadow = true;
+        instancedMesh.receiveShadow = true;
+      }
       instancedMesh.instanceMatrix.needsUpdate = true;
     });
 

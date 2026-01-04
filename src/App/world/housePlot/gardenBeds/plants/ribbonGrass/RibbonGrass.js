@@ -15,9 +15,9 @@ class RibbonGrass extends SceneAssembler {
     const instanced = this.createInstancedMeshes(
       {
         countInRow: 8,
-        countInColumn: 9,
+        countInColumn: 4,
         stepInRow: 1.6,
-        stepInColumn: 1,
+        stepInColumn: 2.5,
         rangeInRow: 0.6,
         rangeInColumn: 0.4,
         scale: 0.02,

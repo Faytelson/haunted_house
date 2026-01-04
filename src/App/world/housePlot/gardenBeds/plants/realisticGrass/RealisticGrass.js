@@ -14,15 +14,16 @@ class RealisticGrass extends SceneAssembler {
   createPlants() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 12,
+        countInRow: 8,
         countInColumn: 5,
-        stepInRow: 1,
+        stepInRow: 1.5,
         stepInColumn: 1.8,
         rangeInRow: 0.6,
         rangeInColumn: 0.4,
         scale: 2,
       },
       this.clonedMeshes,
+      false
     );
     const plants = this.buildGroup(instanced);
     this.group.add(plants);

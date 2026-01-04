@@ -73,6 +73,7 @@ class App {
       requestAnimationFrame(() => {
         this.setInteraction();
         this.hidePreloader();
+        this.cameraManager.animate();
       });
     });
   }
