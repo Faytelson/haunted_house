@@ -6,7 +6,7 @@ import BackYardGround from "@world/housePlot/backYardGround";
 import HouseRoad from "@world/housePlot/houseRoad";
 import HouseTrees from "@world/housePlot/houseTrees";
 import BackYardPlants from "@world/housePlot/backYardPlants";
-import FrontYardPlants from "@world/housePlot/FrontYardPlants";
+import FrontYardPlants from "@world/housePlot/frontYardPlants";
 import GardenBedManager from "@world/housePlot/gardenBeds/GardenBedManager";
 import config from "@world/housePlot/gardenBeds/config";
 import { METRICS } from "@world/metrics";
