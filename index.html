@@ -1,15 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Haunted house</title>
-  <link rel="stylesheet" href="/src/styles.css" />
-</head>
-<body>
-  <div id="app" class="app">
-    <canvas class="app__webgl"></canvas>
-  </div>
-  <script type="module" src="/src/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0"
+    />
+    <title>House</title>
+    <link
+      rel="stylesheet"
+      href="/src/styles.css"
+    />
+  </head>
+  <body style="margin: 0; padding: 0; background: black; overflow: hidden">
+    <div
+      id="app"
+      class="app"
+    >
+      <canvas
+        class="app__webgl"
+        id="canvas"
+      ></canvas>
+      <p class="label label_portfolio">
+        Дважды кликни по дому, <br />
+        чтобы узнать обо мне подробнее
+      </p>
+      <p class="label label_food">
+        Тут где-то спрятался еще один 3-D проект. <br />
+        Два раза кликни на дерево
+      </p>
+      <p class="label label_objects">
+        Тут живет проект <br />
+        на React<br />
+        Дважды кликай на сарай
+      </p>
+
+      <p class="hint hint_1">
+        Чтобы изменить угол обзора,<br />
+        зажми правую кнопку мыши <br />
+        и потяни вправо или влево
+      </p>
+      <p class="hint hint_2">
+        Чтобы приблизить или отдалить,<br />
+        крути колесо мыши <br />
+      </p>
+
+      <div class="preloader">
+        <p class="preloader__text">Загружаю мир...</p>
+        <div class="preloader__overlay preloader__overlay"></div>
+        <div class="preloader__progress"></div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="/src/index.js"
+    ></script>
+  </body>
 </html>

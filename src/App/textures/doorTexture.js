@@ -1,0 +1,51 @@
+export default [
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "color",
+    path: "textures/door/Door_Wood_001_basecolor.jpg",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "ambientOcclusion",
+    path: "textures/door/Door_Wood_001_ambientOcclusion.jpg",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "displacement",
+    path: "textures/door/Door_Wood_001_height.png",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "normal",
+    path: "textures/door/Door_Wood_001_normal.jpg",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "roughness",
+    path: "textures/door/Door_Wood_001_roughness.jpg",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "alpha",
+    path: "textures/door/Door_Wood_001_opacity.jpg",
+  },
+  {
+    name: "doorTexture",
+    category: "textures",
+    type: "texture",
+    textureMapType: "metalness",
+    path: "textures/door/Door_Wood_001_metallic.jpg",
+  },
+];
