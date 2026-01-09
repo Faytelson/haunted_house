@@ -13,7 +13,7 @@ class Barn extends GroupAssembler {
     this.createWalls();
     this.setAnchor();
     this.setId();
-    this.enableShadows();
+    this.enableShadows(true, true);
   }
 
   createRoof() {

@@ -13,7 +13,7 @@ class Door extends MeshAssembler {
   }
 
   createGeometry() {
-    this.geometry = new THREE.PlaneGeometry(METRICS.door.width, METRICS.door.height, 50, 50);
+    this.geometry = new THREE.PlaneGeometry(METRICS.door.width, METRICS.door.height, 20, 20);
   }
 
   setTexture() {
@@ -41,7 +41,6 @@ class Door extends MeshAssembler {
   createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.receiveShadow = true;
-    this.mesh.castShadow = true;
   }
 }
 

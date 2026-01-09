@@ -26,8 +26,8 @@ class Forest extends SceneAssembler {
   createMainForest() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 14,
-        countInColumn: 6,
+        countInRow: 8,
+        countInColumn: 4,
         stepInRow: 10,
         stepInColumn: 15,
         rangeInRow: 5,
@@ -35,6 +35,7 @@ class Forest extends SceneAssembler {
         scale: 0.02,
       },
       this.filteredMeshes,
+      false,
     );
 
     const mainForest = this.buildGroup(instanced);
@@ -44,8 +45,7 @@ class Forest extends SceneAssembler {
   createSideForest() {
     const instanced = this.createInstancedMeshes(
       {
-
-        countInRow: 6,
+        countInRow: 3,
         countInColumn: 4,
         stepInRow: 6,
         stepInColumn: 7,
@@ -60,12 +60,11 @@ class Forest extends SceneAssembler {
 
     const leftForest = this.buildGroup(instanced);
     leftForest.position.x = 0;
-    leftForest.position.z = 90;
+    leftForest.position.z = 55;
     this.group.add(leftForest);
 
     const rightForest = leftForest.clone();
-    leftForest.position.x = 75;
-    leftForest.position.z = 90;
+    rightForest.position.x = 53;
     this.group.add(rightForest);
   }
 

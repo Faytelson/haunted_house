@@ -19,7 +19,7 @@ export const METRICS = {
   roof: {
     slopeOffset: 0.6,
     offsetByLength: 1,
-    depth: 0.05,
+    depth: 0.1,
   },
   porch: {
     length: 2,

@@ -9,16 +9,16 @@ const options = {
   castShadow: true,
   shadow: {
     mapSize: {
-      x: 1024,
-      y: 1024,
+      x: 512,
+      y: 512,
     },
     camera: {
       near: 1,
       far: 150,
       left: -80,
       right: 80,
-      top: 80,
-      bottom: -80,
+      top: 60,
+      bottom: -60,
     },
     bias: -0.0005,
   },

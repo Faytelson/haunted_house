@@ -13,7 +13,7 @@ class HouseRoad extends MeshAssembler {
   }
 
   createGeometry() {
-    this.geometry = new THREE.PlaneGeometry(this.width, METRICS.houseRoad.length, 50, 150);
+    this.geometry = new THREE.PlaneGeometry(this.width, METRICS.houseRoad.length, 10, 20);
   }
 
   setTexture() {
@@ -41,7 +41,6 @@ class HouseRoad extends MeshAssembler {
 
   createMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.receiveShadow = true;
   }
 }
 
