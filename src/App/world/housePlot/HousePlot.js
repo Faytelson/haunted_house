@@ -21,8 +21,6 @@ class HousePlot {
     this.createBackYardGround();
     this.createHouseRoad();
     this.createHouseTrees();
-    this.createBackYardPlants();
-    this.createFrontYardPlants();
     this.createGardenBeds();
   }
 

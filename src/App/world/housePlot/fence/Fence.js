@@ -37,7 +37,6 @@ class Fence {
       displacementMap: texture.displacement,
       displacementScale: 0.001,
       transparent: true,
-      side: THREE.DoubleSide,
     });
   }
 
@@ -48,7 +47,7 @@ class Fence {
       METRICS.fence.thickness,
       50,
       50,
-      50,
+      2,
     );
     const right = this.createFenceHalf(geometry, this.material);
     this.group.add(right);

@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import gsap from "gsap";
 import collectInteractables from "@utils/collectInteractables";
 import { showAndHideElem } from "@utils/showAndHideElem";
 // core

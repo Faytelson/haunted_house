@@ -34,7 +34,6 @@ class Roof {
       metalness: 0.1,
       displacementMap: texture.displacement,
       displacementScale: 0.06,
-      side: THREE.DoubleSide,
     });
   }
 
@@ -52,8 +51,8 @@ class Roof {
       METRICS.house.length + METRICS.roof.offsetByLength,
       this.slopeHeightWithOffset,
       METRICS.roof.depth,
-      200,
-      200,
+      20,
+      20,
     );
   }
 
@@ -102,9 +101,9 @@ class Roof {
       METRICS.barn.width + METRICS.barn.roofOffsetX,
       0.15,
       METRICS.barn.length + METRICS.barn.roofOffsetZ,
-      50,
-      50,
-      50,
+      20,
+      20,
+      20,
     );
   }
 
@@ -118,7 +117,6 @@ class Roof {
     this.group.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
-        child.receiveShadow = true;
       }
     });
   }

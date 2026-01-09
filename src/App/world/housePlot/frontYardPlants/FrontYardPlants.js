@@ -9,7 +9,6 @@ class FrontYardPlants extends SceneAssembler {
     this.getMeshesFromScene();
     this.setClonedMeshes();
     this.createPlants();
-    this.enableShadows();
   }
 
   createPlants() {
@@ -25,6 +24,7 @@ class FrontYardPlants extends SceneAssembler {
         rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
       },
       this.clonedMeshes,
+      false,
     );
     const plants = this.buildGroup(instanced);
     this.group.add(plants);

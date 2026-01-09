@@ -49,12 +49,12 @@ class HouseTrees extends SceneAssembler {
 
     this.group.position.x = -METRICS.fence.width / 2 + 1;
     this.group.position.z = -15;
-    this.group.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
+    // this.group.traverse((child) => {
+    //   if (child.isMesh) {
+    //     child.castShadow = true;
+    //     child.receiveShadow = true;
+    //   }
+    // });
   }
 }
 

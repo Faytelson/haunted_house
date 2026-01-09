@@ -16,6 +16,7 @@ class Environment {
     const { color, intensity } = this.ambientLightOptions;
 
     this.ambientLight = new THREE.AmbientLight(color, intensity);
+    this.ambientLight.castShadow = false;
     this.scene.add(this.ambientLight);
   }
 

@@ -14,16 +14,17 @@ class RibbonGrass extends SceneAssembler {
   createPlants() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 8,
-        countInColumn: 4,
-        stepInRow: 1.6,
-        stepInColumn: 2.5,
-        rangeInRow: 0.6,
-        rangeInColumn: 0.4,
-        scale: 0.02,
+        countInRow: 3,
+        countInColumn: 3,
+        stepInRow: 4.4,
+        stepInColumn: 3,
+        rangeInRow: 1.2,
+        rangeInColumn: 0.5,
+        scale: 0.06,
         rotation: new THREE.Euler(Math.PI / 2, 0, 0),
       },
       this.clonedMeshes,
+      false,
     );
     const plants = this.buildGroup(instanced);
     this.group.add(plants);

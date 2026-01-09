@@ -9,15 +9,14 @@ class BackYardPlants extends SceneAssembler {
     this.getMeshesFromScene();
     this.setClonedMeshes();
     this.createPlants();
-    this.enableShadows();
   }
 
   createPlants() {
     const instanced = this.createInstancedMeshes(
       {
-        countInRow: 9,
+        countInRow: 6,
         countInColumn: 4,
-        stepInRow: 4,
+        stepInRow: 5,
         stepInColumn: 2,
         rangeInRow: 2,
         rangeInColumn: 1.5,
@@ -25,6 +24,7 @@ class BackYardPlants extends SceneAssembler {
         rotation: new THREE.Euler(-Math.PI / 2, 0, 0),
       },
       this.clonedMeshes,
+      false,
     );
     const plants = this.buildGroup(instanced);
     this.group.add(plants);

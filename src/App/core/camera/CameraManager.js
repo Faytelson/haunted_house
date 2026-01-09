@@ -58,8 +58,8 @@ class Camera {
     this.controls.minPolarAngle = Math.PI / 2;
     this.controls.maxPolarAngle = Math.PI / 2;
     this.controls.enablePan = false;
-    this.controls.minAzimuthAngle = -Math.PI / 12;
-    this.controls.maxAzimuthAngle = Math.PI / 12;
+    this.controls.minAzimuthAngle = -Math.PI / 18;
+    this.controls.maxAzimuthAngle = Math.PI / 18;
     this.controls.target.set(this.target.x, this.target.y, this.target.z);
   }
 

@@ -17,7 +17,6 @@ class House {
     this.createPorch();
     this.setAnchor();
     this.setId();
-    this.enableShadows();
   }
 
   createWalls() {
@@ -96,15 +95,6 @@ class House {
       METRICS.house.firstFloorHeight + METRICS.house.secondFloorHeight + 1,
       METRICS.house.length / 2 + METRICS.housePlot.offsetZ,
     );
-  }
-
-  enableShadows() {
-    this.group.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
   }
 
   getObject() {
