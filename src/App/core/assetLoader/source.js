@@ -6,6 +6,7 @@ import groundTexture from "@app/textures/groundTexture";
 import houseRoadTexture from "@app/textures/houseRoadTexture";
 import houseWallsTexture from "@app/textures/houseWallsTexture";
 import roofTexture from "@app/textures/roofTexture";
+import farForestTexture from "@app/textures/farForest";
 import modelAssets from "@world/modelsSrc";
 
 export default [].concat(
@@ -17,5 +18,6 @@ export default [].concat(
   houseRoadTexture,
   houseWallsTexture,
   roofTexture,
+  farForestTexture,
   modelAssets,
 );

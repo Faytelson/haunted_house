@@ -104,11 +104,22 @@ class App {
   async showHints() {
     const hint1 = document.querySelector(".hint_1");
     const hint2 = document.querySelector(".hint_2");
+    const hint3 = document.querySelector(".hint_3");
     await showAndHideElem(hint1, 3000, "hint_visible");
 
-    setTimeout(() => {
-      showAndHideElem(hint2, 3000, "hint_visible");
-    }, 2000);
+    await new Promise((resolve) => {
+      setTimeout(async () => {
+        await showAndHideElem(hint2, 3000, "hint_visible");
+        resolve();
+      }, 2000);
+    });
+
+    await new Promise((resolve) => {
+      setTimeout(async () => {
+        await showAndHideElem(hint3, 3000, "hint_visible");
+        resolve();
+      }, 2000);
+    });
   }
 
   // setFullScreen() {

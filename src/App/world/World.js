@@ -1,6 +1,7 @@
 import Ground from "@world/ground";
 import Forest from "@world/forest/";
 import HousePlot from "@world/housePlot";
+import FarForest from "@world/farForest";
 import { METRICS } from "@world/metrics";
 
 class World {
@@ -8,8 +9,9 @@ class World {
     this.scene = app.scene;
     this.assets = app.assetLoader.assets;
     this.createGround();
-    this.createForest();
     this.createHousePlot();
+    this.createForest();
+    this.createFarForest();
   }
 
   createGround() {
@@ -29,6 +31,12 @@ class World {
     const housePlot = new HousePlot(this.assets).getObject();
     this.scene.add(housePlot);
     housePlot.position.z = METRICS.housePlot.offsetZ;
+  }
+
+  createFarForest() {
+    const farForest = new FarForest(this.assets.textures.farForestTexture).getMesh();
+    farForest.position.z = -50;
+    this.scene.add(farForest);
   }
 }
 
