@@ -1,7 +1,10 @@
 export const METRICS = {
   ground: {
-    width: 200,
+    width: 500,
     height: 150,
+  },
+  farForest: {
+    height: 45,
   },
   house: {
     width: 7,
